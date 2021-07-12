@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 class LoginViewController : UIViewController{
     
@@ -23,11 +24,15 @@ class LoginViewController : UIViewController{
         tapMeButton.clipsToBounds = true
         
         indicatorView.hidesWhenStopped = true
-        indicatorView.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            self.indicatorView.stopAnimating()
-        }
+//        indicatorView.startAnimating()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+//            self.indicatorView.stopAnimating()
+//        }
         
+        SVProgressHUD.show()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            SVProgressHUD.dismiss()
+                }
         
     }
     
