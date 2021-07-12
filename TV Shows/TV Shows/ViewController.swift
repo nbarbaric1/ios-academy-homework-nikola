@@ -17,6 +17,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.titleLabel.text = "This is my third app"
+        print("hello world")
+        
     }
 
 
