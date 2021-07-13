@@ -17,9 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vvy-Qo-yHD">
-                                <rect key="frame" x="68" y="365" width="239" height="82"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vvy-Qo-yHD">
+                                <rect key="frame" x="20" y="648" width="335" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="nbE-hb-M5v"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="32"/>
                                 <state key="normal" title="Tap me" backgroundImage="btnBackground">
                                     <color key="titleColor" systemColor="systemOrangeColor"/>
@@ -28,20 +30,27 @@
                                     <action selector="buttonActionHandler:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RPq-ur-qfI"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tapped 0 times" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8W-dH-n99">
-                                <rect key="frame" x="0.0" y="214" width="375" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tapped 0 times" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8W-dH-n99">
+                                <rect key="frame" x="114.33333333333333" y="74" width="146.66666666666669" height="26.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="3ym-Yd-WVt">
-                                <rect key="frame" x="155" y="271" width="64" height="66"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="3ym-Yd-WVt">
+                                <rect key="frame" x="169" y="387.66666666666669" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <constraints>
+                            <constraint firstItem="t8W-dH-n99" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="GiD-fH-wGb"/>
+                            <constraint firstItem="3ym-Yd-WVt" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Pp0-5D-ofH"/>
+                            <constraint firstAttribute="trailing" secondItem="Vvy-Qo-yHD" secondAttribute="trailing" constant="20" id="QIT-yL-RGK"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Vvy-Qo-yHD" secondAttribute="bottom" constant="30" id="XOd-Rm-qTy"/>
+                            <constraint firstItem="Vvy-Qo-yHD" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="20" id="Yhk-1i-o81"/>
+                            <constraint firstItem="3ym-Yd-WVt" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="dJ7-SH-qrD"/>
+                            <constraint firstItem="t8W-dH-n99" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="raG-sO-7Ri"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="indicatorView" destination="3ym-Yd-WVt" id="fO1-xt-ajc"/>
