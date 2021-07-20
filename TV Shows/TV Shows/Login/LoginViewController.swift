@@ -7,9 +7,7 @@
 
 // MARK: Imports
 
-import Foundation
 import UIKit
-import SVProgressHUD
 
 class LoginViewController : UIViewController{
     
@@ -20,11 +18,11 @@ class LoginViewController : UIViewController{
     @IBOutlet private weak var rememberCheckButton: UIButton!
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var seePasswordButton: UIButton!
+    
     //MARK: - Properties
     
     
     //MARK: - Lifecycle methods
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +40,6 @@ class LoginViewController : UIViewController{
             rememberCheckButton.isSelected = true
             rememberCheckButton.setImage(UIImage(named: "ic-checkbox-selected"), for: .normal)
         }
-        
     }
     
     @IBAction func emailTextfieldEditingDidEndActionHandler() {
@@ -59,9 +56,7 @@ class LoginViewController : UIViewController{
         }
     }
     
-    
     @IBAction func seePasswordButtonActionHandler() {
-        print("tapped")
         if seePasswordButton.isSelected{
             seePasswordButton.isSelected = false
             seePasswordButton.setImage(UIImage(named: "ic-visible"), for: .normal)
@@ -72,7 +67,6 @@ class LoginViewController : UIViewController{
             passwordTextfield.isSecureTextEntry = false
         }
     }
-    
     
     //MARK: - Private functions
     
@@ -103,7 +97,6 @@ extension UIViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
