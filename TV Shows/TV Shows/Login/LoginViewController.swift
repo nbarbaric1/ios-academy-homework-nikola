@@ -25,6 +25,7 @@ class LoginViewController : UIViewController{
     
     //MARK: - Lifecycle methods
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -42,6 +43,20 @@ class LoginViewController : UIViewController{
             rememberCheckButton.setImage(UIImage(named: "ic-checkbox-selected"), for: .normal)
         }
         
+    }
+    
+    @IBAction func emailTextfieldEditingDidEndActionHandler() {
+        if let input = emailTextfield.text{
+            if isValidEmail(input) {
+                loginButton.isEnabled = true
+                loginButton.backgroundColor = .white
+                loginButton.setTitleColor(.myPurple, for: .normal)
+            } else{
+                loginButton.isEnabled = false
+                loginButton.backgroundColor = .white.withAlphaComponent(0.3)
+                loginButton.setTitleColor(.white.withAlphaComponent(0.4), for: .normal)
+            }
+        }
     }
     
     
@@ -71,6 +86,13 @@ class LoginViewController : UIViewController{
         loginButton.layer.cornerRadius = 21.5
         loginButton.clipsToBounds = true
     }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
 }
 
     //MARK: - Extensions
@@ -85,4 +107,8 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+extension UIColor {
+  static let myPurple = #colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1)
 }
