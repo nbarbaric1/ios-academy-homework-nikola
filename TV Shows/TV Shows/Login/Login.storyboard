@@ -27,7 +27,7 @@
                                     <color key="titleColor" systemColor="systemOrangeColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="buttonActionHandler:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RPq-ur-qfI"/>
+                                    <action selector="changeStateButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="U4z-52-bbP"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tapped 0 times" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8W-dH-n99">
@@ -53,8 +53,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="changeStateButton" destination="Vvy-Qo-yHD" id="gus-pb-FMO"/>
                         <outlet property="indicatorView" destination="3ym-Yd-WVt" id="fO1-xt-ajc"/>
-                        <outlet property="tapMeButton" destination="Vvy-Qo-yHD" id="CFe-fJ-vT0"/>
                         <outlet property="textLabel" destination="t8W-dH-n99" id="UzB-ec-lzG"/>
                     </connections>
                 </viewController>
