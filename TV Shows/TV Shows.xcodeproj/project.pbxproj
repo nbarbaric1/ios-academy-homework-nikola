@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		420672AD26975F63002306DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420672AC26975F63002306DB /* AppDelegate.swift */; };
 		420672B626975F65002306DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 420672B526975F65002306DB /* Assets.xcassets */; };
 		420672B926975F65002306DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 420672B726975F65002306DB /* LaunchScreen.storyboard */; };
+		4239429F26A70A0500B8141D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4239429E26A70A0500B8141D /* Launch Screen.storyboard */; };
 		427C5F70269C6DCB000BC489 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 427C5F6F269C6DCB000BC489 /* Login.storyboard */; };
 		427C5F72269C6DE9000BC489 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427C5F71269C6DE9000BC489 /* LoginViewController.swift */; };
 		B116EEA007E847624584A62B /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33BFA9C0E4879027F658BAD9 /* Pods_TV_Shows.framework */; };
@@ -23,6 +24,7 @@
 		420672B526975F65002306DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		420672B826975F65002306DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		420672BA26975F65002306DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4239429E26A70A0500B8141D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		427C5F6F269C6DCB000BC489 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		427C5F71269C6DE9000BC489 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DBAF33CE8F73495F6D1C1E84 /* Pods-TV Shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.debug.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.debug.xcconfig"; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 		420672AB26975F63002306DB /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
+				4239429D26A709BD00B8141D /* Splashscreen */,
 				427C5F6E269C6D95000BC489 /* Login */,
 				420672AC26975F63002306DB /* AppDelegate.swift */,
 				420672B526975F65002306DB /* Assets.xcassets */,
@@ -68,6 +71,14 @@
 				420672BA26975F65002306DB /* Info.plist */,
 			);
 			path = "TV Shows";
+			sourceTree = "<group>";
+		};
+		4239429D26A709BD00B8141D /* Splashscreen */ = {
+			isa = PBXGroup;
+			children = (
+				4239429E26A70A0500B8141D /* Launch Screen.storyboard */,
+			);
+			path = Splashscreen;
 			sourceTree = "<group>";
 		};
 		427C5F6E269C6D95000BC489 /* Login */ = {
@@ -85,7 +96,6 @@
 				DBAF33CE8F73495F6D1C1E84 /* Pods-TV Shows.debug.xcconfig */,
 				04BCEE01DB6F00BB50EEC988 /* Pods-TV Shows.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -158,6 +168,7 @@
 			files = (
 				420672B926975F65002306DB /* LaunchScreen.storyboard in Resources */,
 				420672B626975F65002306DB /* Assets.xcassets in Resources */,
+				4239429F26A70A0500B8141D /* Launch Screen.storyboard in Resources */,
 				427C5F70269C6DCB000BC489 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
