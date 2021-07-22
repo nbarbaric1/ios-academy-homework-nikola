@@ -8,6 +8,8 @@
 // MARK: Imports
 
 import UIKit
+import Alamofire
+import SVProgressHUD
 
 class LoginViewController : UIViewController{
     
@@ -18,8 +20,10 @@ class LoginViewController : UIViewController{
     @IBOutlet private weak var rememberCheckButton: UIButton!
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var seePasswordButton: UIButton!
+    @IBOutlet private weak var registerButton: UIButton!
     
     //MARK: - Properties
+    
     
     
     //MARK: - Lifecycle methods
@@ -41,22 +45,17 @@ class LoginViewController : UIViewController{
             rememberCheckButton.setImage(UIImage(named: "ic-checkbox-selected"), for: .normal)
         }
     }
-    
-    @IBAction func emailTextfieldEditingDidEndActionHandler() {
-        if let input = emailTextfield.text{
-            if isValidEmail(input) {
-                loginButton.isEnabled = true
-                loginButton.backgroundColor = .white
-                loginButton.setTitleColor(.myPurple, for: .normal)
-            } else{
-                loginButton.isEnabled = false
-                loginButton.backgroundColor = .white.withAlphaComponent(0.3)
-                loginButton.setTitleColor(.white.withAlphaComponent(0.4), for: .normal)
-            }
-        }
+    @IBAction private func passwordEditingDidEndActionHandler() {
+        checkInputs()
     }
     
-    @IBAction func seePasswordButtonActionHandler() {
+    @IBAction private func emailTextfieldEditingDidEndActionHandler() {
+        checkInputs()
+    }
+    
+    
+    
+    @IBAction private func seePasswordButtonActionHandler() {
         if seePasswordButton.isSelected{
             seePasswordButton.isSelected = false
             seePasswordButton.setImage(UIImage(named: "ic-visible"), for: .normal)
@@ -66,6 +65,40 @@ class LoginViewController : UIViewController{
             seePasswordButton.setImage(UIImage(named: "ic-invisible"), for: .normal)
             passwordTextfield.isSecureTextEntry = false
         }
+    }
+    
+    @IBAction private func loginButtonActionHandler(){
+        
+        SVProgressHUD.show()
+        let params : [String: String] = [
+            "email" : "nikolainfinum@gmail.com",
+            "password" : "test1234"
+        ]
+        
+        AF
+            .request(
+                "https://tv-shows.infinum.academy/users/sign_in",
+                method: .post,
+                parameters: params,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { [weak self] response in
+                
+                switch response.result{
+                
+                    case .success(let user):
+                        print("succes: \(user.user.email)")
+                        SVProgressHUD.showSuccess(withStatus: "Success")
+                    case .failure(let error):
+                        print("fail")
+                        SVProgressHUD.showError(withStatus: "Failure")
+                }
+                
+            }
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = storyboard.instantiateViewController(withIdentifier: "Home_ViewController") as! HomeViewController
+        navigationController?.pushViewController(homeViewController, animated: true)
     }
     
     //MARK: - Private functions
@@ -79,6 +112,26 @@ class LoginViewController : UIViewController{
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
         loginButton.layer.cornerRadius = 21.5
         loginButton.clipsToBounds = true
+    }
+    
+    private func checkInputs(){
+        if let email = emailTextfield.text,
+           let password = passwordTextfield.text{
+            
+            if isValidEmail(email) && password.count > 5{
+                loginButton.isEnabled = true
+                loginButton.backgroundColor = .white
+                loginButton.setTitleColor(.myPurple, for: .normal)
+                registerButton.isEnabled = true
+                registerButton.setTitleColor(.white, for: .normal)
+            } else{
+                loginButton.isEnabled = false
+                loginButton.backgroundColor = .white.withAlphaComponent(0.3)
+                loginButton.setTitleColor(.white.withAlphaComponent(0.4), for: .normal)
+                registerButton.isEnabled = false
+                registerButton.setTitleColor(.white.withAlphaComponent(0.3), for: .normal)
+            }
+        }
     }
     
     private func isValidEmail(_ email: String) -> Bool {

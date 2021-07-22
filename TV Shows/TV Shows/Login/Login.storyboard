@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bfz-Mp-Iqw">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -55,7 +54,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SyP-4c-V47" userLabel="simpleLineView">
                                         <rect key="frame" x="0.0" y="49" width="335" height="1"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="0Xp-aw-pDn"/>
                                         </constraints>
@@ -101,7 +100,7 @@
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AOe-Rc-uNw" userLabel="simpleLineView">
                                         <rect key="frame" x="0.0" y="49" width="335" height="1"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="zcD-1C-VVi"/>
                                         </constraints>
@@ -116,6 +115,9 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                        <connections>
+                                            <action selector="passwordEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="MuT-zI-mP8"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -170,6 +172,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="prh-ME-gmb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rNK-QV-aFX" userLabel="registerButton">
                                 <rect key="frame" x="133" y="577.66666666666663" width="109" height="20"/>
@@ -212,15 +217,34 @@
                             <constraint firstItem="aCS-az-flc" firstAttribute="top" secondItem="7qS-3u-tPa" secondAttribute="bottom" constant="20" id="x7B-3S-47V"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="xr0-Pv-bFu"/>
                     <connections>
                         <outlet property="emailTextfield" destination="C5W-Uh-IDU" id="jxx-Ki-KpY"/>
                         <outlet property="loginButton" destination="qff-7m-EWk" id="D6n-Ja-BYF"/>
                         <outlet property="passwordTextfield" destination="0H1-4P-1VG" id="3e9-qC-cew"/>
+                        <outlet property="registerButton" destination="rNK-QV-aFX" id="eam-e2-zuy"/>
                         <outlet property="rememberCheckButton" destination="XB9-jh-37r" id="wNh-tY-PrF"/>
                         <outlet property="seePasswordButton" destination="TAu-JY-MXj" id="vUq-t8-cUW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1010.4" y="59.11330049261084"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="t49-WY-afK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Bfz-Mp-Iqw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Sg-YC-O3J">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="VTK-o2-26o"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6J9-gL-pUO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="68" y="59.11330049261084"/>
         </scene>
@@ -231,8 +255,5 @@
         <image name="logo-white" width="162" height="38"/>
         <image name="splash-top-left" width="140" height="100"/>
         <image name="splash-top-right" width="202" height="266"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
