@@ -25,7 +25,6 @@ class LoginViewController : UIViewController {
     //MARK: - Properties
     var userResponse: UserResponse?
     
-    
     //MARK: - Lifecycle methods
     
     override func viewDidLoad() {
@@ -68,8 +67,6 @@ class LoginViewController : UIViewController {
     @IBAction private func registerButtonActionHandler() {
         
         SVProgressHUD.show()
-        
-        
         let params : [String: String] = [
             "email" : emailTextfield.text!, //je li okej force unwrap ako sam ranije osigurao da se ne moze kliknuti ako nema unosa
             "password" : passwordTextfield.text!,
@@ -120,7 +117,8 @@ class LoginViewController : UIViewController {
                 
                     case .success(let user):
                         print("succes: \(user.user.email)")
-                        SVProgressHUD.showSuccess(withStatus: "Success")
+                        let headers = response.response?.headers.dictionary ?? [:]
+                        self?.handleSuccesfulLogin(for: user.user, headers: headers)
                         self?.navigateToHomeScreen()
                     case .failure(let error):
                         print("error: \(error)")
@@ -135,6 +133,14 @@ class LoginViewController : UIViewController {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = storyboard.instantiateViewController(withIdentifier: "Home_ViewController") as! HomeViewController
         navigationController?.pushViewController(homeViewController, animated: true)
+    }
+    
+    private func handleSuccesfulLogin(for user: User, headers: [String: String]) {
+        guard let authInfo = try? AuthInfo(headers: headers) else {
+            SVProgressHUD.showError(withStatus: "Missing headers")
+            return
+        }
+        SVProgressHUD.showSuccess(withStatus: "Success")
     }
     
     private func configureUI(){
