@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import SVProgressHUD
 
-class LoginViewController : UIViewController{
+class LoginViewController : UIViewController {
     
     //MARK: - Outlets
     
@@ -23,7 +23,7 @@ class LoginViewController : UIViewController{
     @IBOutlet private weak var registerButton: UIButton!
     
     //MARK: - Properties
-    
+    var userResponse: UserResponse?
     
     
     //MARK: - Lifecycle methods
@@ -53,8 +53,6 @@ class LoginViewController : UIViewController{
         checkInputs()
     }
     
-    
-    
     @IBAction private func seePasswordButtonActionHandler() {
         if seePasswordButton.isSelected{
             seePasswordButton.isSelected = false
@@ -67,12 +65,45 @@ class LoginViewController : UIViewController{
         }
     }
     
+    @IBAction private func registerButtonActionHandler() {
+        
+        SVProgressHUD.show()
+        
+        
+        let params : [String: String] = [
+            "email" : emailTextfield.text!, //je li okej force unwrap ako sam ranije osigurao da se ne moze kliknuti ako nema unosa
+            "password" : passwordTextfield.text!,
+            "password_confirmation" : passwordTextfield.text!
+        ]
+        
+        AF
+            .request(
+                "https://tv-shows.infinum.academy/users",
+                method: .post,
+                parameters: params,
+                encoder: JSONParameterEncoder.default)
+            .validate()
+            .responseDecodable(of: UserResponse.self) { [weak self] response in
+                
+                switch response.result{
+                    case .success(let user):
+                        self?.userResponse = user
+                        print(self?.userResponse)
+                        SVProgressHUD.showSuccess(withStatus: "Success")
+                        self?.navigateToHomeScreen()
+                    case .failure(let error):
+                        print("error: \(error)")
+                        SVProgressHUD.showError(withStatus: "Failure")
+                }
+            }
+    }
+    
     @IBAction private func loginButtonActionHandler(){
         
         SVProgressHUD.show()
         let params : [String: String] = [
-            "email" : "nikolainfinum@gmail.com",
-            "password" : "test1234"
+            "email" : emailTextfield.text!,
+            "password" : passwordTextfield.text!,
         ]
         
         AF
@@ -90,18 +121,21 @@ class LoginViewController : UIViewController{
                     case .success(let user):
                         print("succes: \(user.user.email)")
                         SVProgressHUD.showSuccess(withStatus: "Success")
+                        self?.navigateToHomeScreen()
                     case .failure(let error):
-                        print("fail")
+                        print("error: \(error)")
                         SVProgressHUD.showError(withStatus: "Failure")
                 }
-                
             }
+    }
+    
+    //MARK: - Private functions
+    
+    private func navigateToHomeScreen(){
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = storyboard.instantiateViewController(withIdentifier: "Home_ViewController") as! HomeViewController
         navigationController?.pushViewController(homeViewController, animated: true)
     }
-    
-    //MARK: - Private functions
     
     private func configureUI(){
         emailTextfield.attributedPlaceholder = NSAttributedString(

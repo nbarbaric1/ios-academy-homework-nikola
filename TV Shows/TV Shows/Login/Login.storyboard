@@ -186,6 +186,9 @@
                                 <state key="normal" title="Register">
                                     <color key="titleColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="registerButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ggP-KN-HbX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
