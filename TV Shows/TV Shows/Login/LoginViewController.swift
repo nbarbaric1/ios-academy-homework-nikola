@@ -13,7 +13,7 @@ import SVProgressHUD
 
 class LoginViewController : UIViewController {
     
-    //MARK: - Outlets
+    // MARK: - Outlets
     
     @IBOutlet private weak var emailTextfield: UITextField!
     @IBOutlet private weak var passwordTextfield: UITextField!
@@ -22,27 +22,41 @@ class LoginViewController : UIViewController {
     @IBOutlet private weak var seePasswordButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
     
-    //MARK: - Properties
+    // MARK: - Properties
+    
     var userResponse: UserResponse?
     
-    //MARK: - Lifecycle methods
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         configureUI()
     }
-    
-    //MARK: - Actions
-    
+}
+
+// MARK: - Extensions
+
+// MARK: Utility
+
+private extension LoginViewController {
+    func configureUI() {
+        emailTextfield.attributedPlaceholder = NSAttributedString(
+            string: "Email",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
+        passwordTextfield.attributedPlaceholder = NSAttributedString(
+            string: "Password",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
+        loginButton.layer.cornerRadius = 22
+        loginButton.clipsToBounds = true
+    }
+}
+
+// MARK: IBActions
+
+private extension LoginViewController{
     @IBAction private func rememberCheckButtonActionHandler() {
-        if rememberCheckButton.isSelected{
-            rememberCheckButton.isSelected = false
-            rememberCheckButton.setImage(UIImage(named: "ic-checkbox-unselected"), for: .normal)
-        } else{
-            rememberCheckButton.isSelected = true
-            rememberCheckButton.setImage(UIImage(named: "ic-checkbox-selected"), for: .normal)
-        }
+        rememberCheckButton.isSelected.toggle()
     }
     @IBAction private func passwordEditingDidEndActionHandler() {
         checkInputs()
@@ -53,24 +67,20 @@ class LoginViewController : UIViewController {
     }
     
     @IBAction private func seePasswordButtonActionHandler() {
-        if seePasswordButton.isSelected{
-            seePasswordButton.isSelected = false
-            seePasswordButton.setImage(UIImage(named: "ic-visible"), for: .normal)
-            passwordTextfield.isSecureTextEntry = true
-        } else{
-            seePasswordButton.isSelected = true
-            seePasswordButton.setImage(UIImage(named: "ic-invisible"), for: .normal)
-            passwordTextfield.isSecureTextEntry = false
-        }
+        seePasswordButton.isSelected.toggle()
+        passwordTextfield.isSecureTextEntry.toggle()
     }
     
     @IBAction private func registerButtonActionHandler() {
+        guard let email = emailTextfield.text,
+              let password = passwordTextfield.text
+        else {return}
         
         SVProgressHUD.show()
         let params : [String: String] = [
-            "email" : emailTextfield.text!, //je li okej force unwrap ako sam ranije osigurao da se ne moze kliknuti ako nema unosa
-            "password" : passwordTextfield.text!,
-            "password_confirmation" : passwordTextfield.text!
+            "email" : email,
+            "password" : password,
+            "password_confirmation" : password
         ]
         
         AF
@@ -81,26 +91,31 @@ class LoginViewController : UIViewController {
                 encoder: JSONParameterEncoder.default)
             .validate()
             .responseDecodable(of: UserResponse.self) { [weak self] response in
+                guard let self = self else { return }
                 
                 switch response.result{
-                    case .success(let user):
-                        self?.userResponse = user
-                        print(self?.userResponse)
-                        SVProgressHUD.showSuccess(withStatus: "Success")
-                        self?.navigateToHomeScreen()
-                    case .failure(let error):
-                        print("error: \(error)")
-                        SVProgressHUD.showError(withStatus: "Failure")
+                case .success(let user):
+                    self.userResponse = user
+                    print(self.userResponse)
+                    SVProgressHUD.showSuccess(withStatus: "Success")
+                    self.navigateToHomeScreen()
+                case .failure(let error):
+                    print("error: \(error)")
+                    SVProgressHUD.showError(withStatus: "Failure")
                 }
             }
     }
     
     @IBAction private func loginButtonActionHandler(){
         
+        guard let email = emailTextfield.text,
+              let password = passwordTextfield.text
+        else {return}
+        
         SVProgressHUD.show()
         let params : [String: String] = [
-            "email" : emailTextfield.text!,
-            "password" : passwordTextfield.text!,
+            "email" : email,
+            "password" : password,
         ]
         
         AF
@@ -112,26 +127,29 @@ class LoginViewController : UIViewController {
             )
             .validate()
             .responseDecodable(of: UserResponse.self) { [weak self] response in
+                guard let self = self else { return }
                 
-                switch response.result{
+                switch response.result {
                 
-                    case .success(let user):
-                        print("succes: \(user.user.email)")
-                        let headers = response.response?.headers.dictionary ?? [:]
-                        self?.handleSuccesfulLogin(for: user.user, headers: headers)
-                        self?.navigateToHomeScreen()
-                    case .failure(let error):
-                        print("error: \(error)")
-                        SVProgressHUD.showError(withStatus: "Failure")
+                case .success(let user):
+                    print("succes: \(user.user.email)")
+                    let headers = response.response?.headers.dictionary ?? [:]
+                    self.handleSuccesfulLogin(for: user.user, headers: headers)
+                    self.navigateToHomeScreen()
+                case .failure(let error):
+                    print("error: \(error)")
+                    SVProgressHUD.showError(withStatus: "Failure")
                 }
             }
     }
-    
-    //MARK: - Private functions
-    
+}
+
+// MARK: - Private functions
+
+private extension LoginViewController {
     private func navigateToHomeScreen(){
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let homeViewController = storyboard.instantiateViewController(withIdentifier: "Home_ViewController") as! HomeViewController
+        let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     
@@ -143,58 +161,24 @@ class LoginViewController : UIViewController {
         SVProgressHUD.showSuccess(withStatus: "Success")
     }
     
-    private func configureUI(){
-        emailTextfield.attributedPlaceholder = NSAttributedString(
-            string: "Email",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
-        passwordTextfield.attributedPlaceholder = NSAttributedString(
-            string: "Password",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
-        loginButton.layer.cornerRadius = 21.5
-        loginButton.clipsToBounds = true
-    }
-    
-    private func checkInputs(){
-        if let email = emailTextfield.text,
-           let password = passwordTextfield.text{
-            
-            if isValidEmail(email) && password.count > 5{
-                loginButton.isEnabled = true
-                loginButton.backgroundColor = .white
-                loginButton.setTitleColor(.myPurple, for: .normal)
-                registerButton.isEnabled = true
-                registerButton.setTitleColor(.white, for: .normal)
-            } else{
-                loginButton.isEnabled = false
-                loginButton.backgroundColor = .white.withAlphaComponent(0.3)
-                loginButton.setTitleColor(.white.withAlphaComponent(0.4), for: .normal)
-                registerButton.isEnabled = false
-                registerButton.setTitleColor(.white.withAlphaComponent(0.3), for: .normal)
-            }
+    private func checkInputs() {
+        guard let email = emailTextfield.text,
+              let password = passwordTextfield.text
+        else { return }
+        
+        if email.isValidEmail() && password.count > 5{
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = .white
+            loginButton.setTitleColor(.myPurple, for: .normal)
+            registerButton.isEnabled = true
+            registerButton.setTitleColor(.white, for: .normal)
+        } else {
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = .white.withAlphaComponent(0.3)
+            loginButton.setTitleColor(.white.withAlphaComponent(0.4), for: .normal)
+            registerButton.isEnabled = false
+            registerButton.setTitleColor(.white.withAlphaComponent(0.3), for: .normal)
         }
+        
     }
-    
-    private func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-}
-
-    //MARK: - Extensions
-
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
-
-extension UIColor {
-  static let myPurple = #colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1)
 }

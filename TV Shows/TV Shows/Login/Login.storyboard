@@ -94,6 +94,7 @@
                                             <constraint firstAttribute="width" constant="24" id="Den-hE-Arf"/>
                                         </constraints>
                                         <state key="normal" image="ic-visible"/>
+                                        <state key="selected" image="ic-invisible"/>
                                         <connections>
                                             <action selector="seePasswordButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Y4T-8x-urL"/>
                                         </connections>
@@ -142,6 +143,7 @@
                                             <constraint firstAttribute="width" constant="24" id="CcY-9d-rnU"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="ic-checkbox-unselected"/>
+                                        <state key="selected" image="ic-checkbox-selected"/>
                                         <connections>
                                             <action selector="rememberCheckButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="IUk-Kq-AcB"/>
                                         </connections>
@@ -253,7 +255,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic-checkbox-selected" width="24" height="24"/>
         <image name="ic-checkbox-unselected" width="24" height="24"/>
+        <image name="ic-invisible" width="24" height="24"/>
         <image name="ic-visible" width="24" height="24"/>
         <image name="logo-white" width="162" height="38"/>
         <image name="splash-top-left" width="140" height="100"/>
