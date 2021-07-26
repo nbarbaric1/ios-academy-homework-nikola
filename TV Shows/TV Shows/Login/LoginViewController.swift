@@ -13,7 +13,7 @@ import SVProgressHUD
 
 class LoginViewController : UIViewController {
     
-    //MARK: - Outlets
+    // MARK: - Outlets
     
     @IBOutlet private weak var emailTextfield: UITextField!
     @IBOutlet private weak var passwordTextfield: UITextField!
@@ -22,17 +22,25 @@ class LoginViewController : UIViewController {
     @IBOutlet private weak var seePasswordButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
     
-    //MARK: - Properties
+    // MARK: - Properties
     var userResponse: UserResponse?
     
-    //MARK: - Lifecycle methods
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         configureUI()
     }
+}
+
+// MARK: - Extensions
+
+    // MARK: - Utility
+
+private extension LoginViewController{
     
+
     //MARK: - Actions
     
     @IBAction private func rememberCheckButtonActionHandler() {
@@ -144,6 +152,7 @@ class LoginViewController : UIViewController {
     }
     
     private func configureUI(){
+
         emailTextfield.attributedPlaceholder = NSAttributedString(
             string: "Email",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
@@ -153,6 +162,7 @@ class LoginViewController : UIViewController {
         loginButton.layer.cornerRadius = 21.5
         loginButton.clipsToBounds = true
     }
+
     
     private func checkInputs(){
         if let email = emailTextfield.text,
@@ -180,21 +190,31 @@ class LoginViewController : UIViewController {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
-}
 
-    //MARK: - Extensions
 
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+    // MARK: - IBActions
+
+private extension LoginViewController{
+    
+    @IBAction func rememberCheckButtonActionHandler() {
+        rememberCheckButton.isSelected.toggle()
     }
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+    
+    @IBAction func emailTextfieldEditingDidEndActionHandler() {
+        guard let input: String = emailTextfield.text else { return }
+        if input.isValidEmail() {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = .white
+            loginButton.setTitleColor(.myPurple, for: .normal)
+        } else {
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = .white.withAlphaComponent(0.3)
+            loginButton.setTitleColor(.white.withAlphaComponent(0.4), for: .normal)
+        }
     }
-}
-
-extension UIColor {
-  static let myPurple = #colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1)
+    
+    @IBAction func seePasswordButtonActionHandler() {
+        seePasswordButton.isSelected.toggle()
+        passwordTextfield.isSecureTextEntry.toggle()
+    }
 }
