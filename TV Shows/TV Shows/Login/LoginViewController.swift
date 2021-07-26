@@ -7,65 +7,68 @@
 
 // MARK: Imports
 
-import Foundation
 import UIKit
-import SVProgressHUD
 
 class LoginViewController : UIViewController{
     
-    //MARK: - Outlets
+    // MARK: - Outlets
     
-    @IBOutlet private weak var changeStateButton: UIButton!
-    @IBOutlet private weak var textLabel: UILabel!
-    @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
+    @IBOutlet private weak var emailTextfield: UITextField!
+    @IBOutlet private weak var passwordTextfield: UITextField!
+    @IBOutlet private weak var rememberCheckButton: UIButton!
+    @IBOutlet private weak var loginButton: UIButton!
+    @IBOutlet private weak var seePasswordButton: UIButton!
     
-    //MARK: - Properties
-    
-    private var numberOfTaps: Int = 0
-    
-    //MARK: - Lifecycle methods
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         configureUI()
     }
+}
+
+// MARK: - Extensions
+
+    // MARK: - Utility
+
+private extension LoginViewController{
     
-    //MARK: - Actions
+    func configureUI() {
+        emailTextfield.attributedPlaceholder = NSAttributedString(
+            string: "Email",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
+        passwordTextfield.attributedPlaceholder = NSAttributedString(
+            string: "Password",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
+        loginButton.layer.cornerRadius = 21.5
+        loginButton.clipsToBounds = true
+    }
+}
+
+    // MARK: - IBActions
+
+private extension LoginViewController{
     
-    @IBAction func changeStateButtonActionHandler() {
-        print("button tapped")
-        numberOfTaps += 1
-        textLabel.text = "Tapped \(numberOfTaps) times"
-        
-        if indicatorView.isAnimating{
-            indicatorView.stopAnimating()
-            changeStateButton.setTitle("Start", for: .normal)
+    @IBAction func rememberCheckButtonActionHandler() {
+        rememberCheckButton.isSelected.toggle()
+    }
+    
+    @IBAction func emailTextfieldEditingDidEndActionHandler() {
+        guard let input: String = emailTextfield.text else { return }
+        if input.isValidEmail() {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = .white
+            loginButton.setTitleColor(.myPurple, for: .normal)
         } else {
-            indicatorView.startAnimating()
-            changeStateButton.setTitle("Stop", for: .normal)
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = .white.withAlphaComponent(0.3)
+            loginButton.setTitleColor(.white.withAlphaComponent(0.4), for: .normal)
         }
     }
     
-    //MARK: - Private functions
-    
-    private func configureUI(){
-        changeStateButton.layer.cornerRadius = 25
-        changeStateButton.clipsToBounds = true
-        indicatorView.hidesWhenStopped = true
-        
-        showIndicatorView(forSeconds: 3)
-    }
-    
-    private func showIndicatorView(forSeconds: Int){
-        indicatorView.startAnimating()
-        delay(for: 3.0){
-            self.indicatorView.stopAnimating()
-        }
-    }
-    
-    private func delay(for delay: Double, handler: @escaping () -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay){
-            handler()
-        }
+    @IBAction func seePasswordButtonActionHandler() {
+        seePasswordButton.isSelected.toggle()
+        passwordTextfield.isSecureTextEntry.toggle()
     }
 }
