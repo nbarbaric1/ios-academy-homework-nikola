@@ -25,6 +25,7 @@ class LoginViewController : UIViewController {
     // MARK: - Properties
     
     var userResponse: UserResponse?
+    var authInfo: AuthInfo?
     
     // MARK: - Lifecycle methods
     
@@ -94,14 +95,15 @@ private extension LoginViewController{
                 guard let self = self else { return }
                 
                 switch response.result{
-                case .success(let user):
-                    self.userResponse = user
-                    print(self.userResponse)
-                    SVProgressHUD.showSuccess(withStatus: "Success")
+                case .success(let userResponse):
+                    let headers = response.response?.headers.dictionary ?? [:]
+                    self.userResponse = userResponse
+                    self.handleAuthInfoWhenSuccesfulLoginOrRegister(headers: headers)
                     self.navigateToHomeScreen()
                 case .failure(let error):
                     print("error: \(error)")
-                    SVProgressHUD.showError(withStatus: "Failure")
+                    SVProgressHUD.dismiss()
+                    self.alertError()
                 }
             }
     }
@@ -131,14 +133,16 @@ private extension LoginViewController{
                 
                 switch response.result {
                 
-                case .success(let user):
-                    print("succes: \(user.user.email)")
+                case .success(let userResponse):
+                    print("succes: \(userResponse.user.email)")
                     let headers = response.response?.headers.dictionary ?? [:]
-                    self.handleSuccesfulLogin(for: user.user, headers: headers)
+                    self.userResponse = userResponse
+                    self.handleAuthInfoWhenSuccesfulLoginOrRegister(headers: headers)
                     self.navigateToHomeScreen()
                 case .failure(let error):
                     print("error: \(error)")
-                    SVProgressHUD.showError(withStatus: "Failure")
+                    SVProgressHUD.dismiss()
+                    self.alertError()
                 }
             }
     }
@@ -147,21 +151,24 @@ private extension LoginViewController{
 // MARK: - Private functions
 
 private extension LoginViewController {
-    private func navigateToHomeScreen(){
+    func navigateToHomeScreen() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        homeViewController.userResponse = userResponse
+        homeViewController.authInfo = authInfo
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     
-    private func handleSuccesfulLogin(for user: User, headers: [String: String]) {
+    func handleAuthInfoWhenSuccesfulLoginOrRegister(headers: [String: String]) {
         guard let authInfo = try? AuthInfo(headers: headers) else {
             SVProgressHUD.showError(withStatus: "Missing headers")
             return
         }
+        self.authInfo = authInfo
         SVProgressHUD.showSuccess(withStatus: "Success")
     }
     
-    private func checkInputs() {
+    func checkInputs() {
         guard let email = emailTextfield.text,
               let password = passwordTextfield.text
         else { return }
@@ -179,6 +186,12 @@ private extension LoginViewController {
             registerButton.isEnabled = false
             registerButton.setTitleColor(.white.withAlphaComponent(0.3), for: .normal)
         }
-        
+    }
+    
+    func alertError() {
+        let alertController = UIAlertController(title: "Error", message: "An error occurred. Please check your inputs and try again.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
     }
 }
