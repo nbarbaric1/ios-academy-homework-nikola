@@ -135,7 +135,6 @@
                                             <constraint firstAttribute="width" constant="24" id="CcY-9d-rnU"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="ic-checkbox-unselected"/>
-                                        <state key="disabled" image="ic-checkbox-unselected"/>
                                         <state key="selected" image="ic-checkbox-selected"/>
                                         <connections>
                                             <action selector="rememberCheckButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="IUk-Kq-AcB"/>

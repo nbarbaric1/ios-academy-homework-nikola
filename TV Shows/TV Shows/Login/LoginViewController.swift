@@ -23,6 +23,7 @@ class LoginViewController : UIViewController {
     @IBOutlet private weak var registerButton: UIButton!
     
     // MARK: - Properties
+    
     var userResponse: UserResponse?
     
     // MARK: - Lifecycle methods
@@ -36,13 +37,27 @@ class LoginViewController : UIViewController {
 
 // MARK: - Extensions
 
-// MARK: - Utility
+// MARK: Utility
+
+private extension LoginViewController {
+    func configureUI() {
+        emailTextfield.attributedPlaceholder = NSAttributedString(
+            string: "Email",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
+        passwordTextfield.attributedPlaceholder = NSAttributedString(
+            string: "Password",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
+        loginButton.layer.cornerRadius = 22
+        loginButton.clipsToBounds = true
+    }
+}
+
+// MARK: IBActions
 
 private extension LoginViewController{
-    
-    
-    // MARK: - Actions
-    
+    @IBAction private func rememberCheckButtonActionHandler() {
+        rememberCheckButton.isSelected.toggle()
+    }
     @IBAction private func passwordEditingDidEndActionHandler() {
         checkInputs()
     }
@@ -51,13 +66,21 @@ private extension LoginViewController{
         checkInputs()
     }
     
+    @IBAction private func seePasswordButtonActionHandler() {
+        seePasswordButton.isSelected.toggle()
+        passwordTextfield.isSecureTextEntry.toggle()
+    }
+    
     @IBAction private func registerButtonActionHandler() {
+        guard let email = emailTextfield.text,
+              let password = passwordTextfield.text
+        else {return}
         
         SVProgressHUD.show()
         let params : [String: String] = [
-            "email" : emailTextfield.text!, //je li okej force unwrap ako sam ranije osigurao da se ne moze kliknuti ako nema unosa
-            "password" : passwordTextfield.text!,
-            "password_confirmation" : passwordTextfield.text!
+            "email" : email,
+            "password" : password,
+            "password_confirmation" : password
         ]
         
         AF
@@ -68,13 +91,14 @@ private extension LoginViewController{
                 encoder: JSONParameterEncoder.default)
             .validate()
             .responseDecodable(of: UserResponse.self) { [weak self] response in
+                guard let self = self else { return }
                 
                 switch response.result{
                 case .success(let user):
-                    self?.userResponse = user
-                    print(self?.userResponse)
+                    self.userResponse = user
+                    print(self.userResponse)
                     SVProgressHUD.showSuccess(withStatus: "Success")
-                    self?.navigateToHomeScreen()
+                    self.navigateToHomeScreen()
                 case .failure(let error):
                     print("error: \(error)")
                     SVProgressHUD.showError(withStatus: "Failure")
@@ -84,10 +108,14 @@ private extension LoginViewController{
     
     @IBAction private func loginButtonActionHandler(){
         
+        guard let email = emailTextfield.text,
+              let password = passwordTextfield.text
+        else {return}
+        
         SVProgressHUD.show()
         let params : [String: String] = [
-            "email" : emailTextfield.text!,
-            "password" : passwordTextfield.text!,
+            "email" : email,
+            "password" : password,
         ]
         
         AF
@@ -99,26 +127,29 @@ private extension LoginViewController{
             )
             .validate()
             .responseDecodable(of: UserResponse.self) { [weak self] response in
+                guard let self = self else { return }
                 
-                switch response.result{
+                switch response.result {
                 
                 case .success(let user):
                     print("succes: \(user.user.email)")
                     let headers = response.response?.headers.dictionary ?? [:]
-                    self?.handleSuccesfulLogin(for: user.user, headers: headers)
-                    self?.navigateToHomeScreen()
+                    self.handleSuccesfulLogin(for: user.user, headers: headers)
+                    self.navigateToHomeScreen()
                 case .failure(let error):
                     print("error: \(error)")
                     SVProgressHUD.showError(withStatus: "Failure")
                 }
             }
     }
-    
-    //MARK: - Private functions
-    
+}
+
+// MARK: - Private functions
+
+private extension LoginViewController {
     private func navigateToHomeScreen(){
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let homeViewController = storyboard.instantiateViewController(withIdentifier: "Home_ViewController") as! HomeViewController
+        let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     
@@ -130,59 +161,24 @@ private extension LoginViewController{
         SVProgressHUD.showSuccess(withStatus: "Success")
     }
     
-    private func configureUI(){
+    private func checkInputs() {
+        guard let email = emailTextfield.text,
+              let password = passwordTextfield.text
+        else { return }
         
-        emailTextfield.attributedPlaceholder = NSAttributedString(
-            string: "Email",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
-        passwordTextfield.attributedPlaceholder = NSAttributedString(
-            string: "Password",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
-        loginButton.layer.cornerRadius = 21.5
-        loginButton.clipsToBounds = true
-    }
-    
-    
-    private func checkInputs(){
-        if let email = emailTextfield.text,
-           let password = passwordTextfield.text{
-            
-            if isValidEmail(email) && password.count > 5{
-                loginButton.isEnabled = true
-                loginButton.backgroundColor = .white
-                loginButton.setTitleColor(.myPurple, for: .normal)
-                registerButton.isEnabled = true
-                registerButton.setTitleColor(.white, for: .normal)
-            } else{
-                loginButton.isEnabled = false
-                loginButton.backgroundColor = .white.withAlphaComponent(0.3)
-                loginButton.setTitleColor(.white.withAlphaComponent(0.4), for: .normal)
-                registerButton.isEnabled = false
-                registerButton.setTitleColor(.white.withAlphaComponent(0.3), for: .normal)
-            }
+        if email.isValidEmail() && password.count > 5{
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = .white
+            loginButton.setTitleColor(.myPurple, for: .normal)
+            registerButton.isEnabled = true
+            registerButton.setTitleColor(.white, for: .normal)
+        } else {
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = .white.withAlphaComponent(0.3)
+            loginButton.setTitleColor(.white.withAlphaComponent(0.4), for: .normal)
+            registerButton.isEnabled = false
+            registerButton.setTitleColor(.white.withAlphaComponent(0.3), for: .normal)
         }
-    }
-    
-    private func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-    
-    
-    // MARK: - IBActions
-    
-}
-
-private extension LoginViewController{
-    
-    @IBAction func rememberCheckButtonActionHandler() {
-        rememberCheckButton.isSelected.toggle()
-    }
-    
-    @IBAction func seePasswordButtonActionHandler() {
-        seePasswordButton.isSelected.toggle()
-        passwordTextfield.isSecureTextEntry.toggle()
     }
 }
