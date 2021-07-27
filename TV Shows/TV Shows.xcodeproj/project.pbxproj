@@ -13,6 +13,7 @@
 		42262D8C26B017EB00E938B5 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42262D8B26B017EB00E938B5 /* AuthInfo.swift */; };
 		42262D8E26B018B000E938B5 /* ShowsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42262D8D26B018B000E938B5 /* ShowsResponse.swift */; };
 		4239429F26A70A0500B8141D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4239429E26A70A0500B8141D /* Launch Screen.storyboard */; };
+
 		42424AFD26A97CF6003E96FC /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42424AFC26A97CF6003E96FC /* Home.storyboard */; };
 		42424AFF26A97D08003E96FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424AFE26A97D08003E96FC /* HomeViewController.swift */; };
 		42424B0126AA2223003E96FC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0026AA2223003E96FC /* User.swift */; };
@@ -35,6 +36,7 @@
 		42262D8B26B017EB00E938B5 /* AuthInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInfo.swift; sourceTree = "<group>"; };
 		42262D8D26B018B000E938B5 /* ShowsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsResponse.swift; sourceTree = "<group>"; };
 		4239429E26A70A0500B8141D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+
 		42424AFC26A97CF6003E96FC /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		42424AFE26A97D08003E96FC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		42424B0026AA2223003E96FC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -82,6 +84,9 @@
 				42262D8A26B017C000E938B5 /* Models */,
 				42424B0926AF575B003E96FC /* Extensions */,
 				42424AFB26A97CD1003E96FC /* Home */,
+
+				42424B0226AC5774003E96FC /* Extensions */,
+
 				4239429D26A709BD00B8141D /* Splashscreen */,
 				427C5F6E269C6D95000BC489 /* Login */,
 				420672AC26975F63002306DB /* AppDelegate.swift */,
@@ -420,6 +425,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3GR8A5V8R6;
 				INFOPLIST_FILE = "TV Shows/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -439,6 +445,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3GR8A5V8R6;
 				INFOPLIST_FILE = "TV Shows/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
