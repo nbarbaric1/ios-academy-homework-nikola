@@ -36,40 +36,19 @@ class LoginViewController : UIViewController {
 
 // MARK: - Extensions
 
-    // MARK: - Utility
+// MARK: - Utility
 
 private extension LoginViewController{
     
-
-    //MARK: - Actions
     
-    @IBAction private func rememberCheckButtonActionHandler() {
-        if rememberCheckButton.isSelected{
-            rememberCheckButton.isSelected = false
-            rememberCheckButton.setImage(UIImage(named: "ic-checkbox-unselected"), for: .normal)
-        } else{
-            rememberCheckButton.isSelected = true
-            rememberCheckButton.setImage(UIImage(named: "ic-checkbox-selected"), for: .normal)
-        }
-    }
+    // MARK: - Actions
+    
     @IBAction private func passwordEditingDidEndActionHandler() {
         checkInputs()
     }
     
     @IBAction private func emailTextfieldEditingDidEndActionHandler() {
         checkInputs()
-    }
-    
-    @IBAction private func seePasswordButtonActionHandler() {
-        if seePasswordButton.isSelected{
-            seePasswordButton.isSelected = false
-            seePasswordButton.setImage(UIImage(named: "ic-visible"), for: .normal)
-            passwordTextfield.isSecureTextEntry = true
-        } else{
-            seePasswordButton.isSelected = true
-            seePasswordButton.setImage(UIImage(named: "ic-invisible"), for: .normal)
-            passwordTextfield.isSecureTextEntry = false
-        }
     }
     
     @IBAction private func registerButtonActionHandler() {
@@ -91,14 +70,14 @@ private extension LoginViewController{
             .responseDecodable(of: UserResponse.self) { [weak self] response in
                 
                 switch response.result{
-                    case .success(let user):
-                        self?.userResponse = user
-                        print(self?.userResponse)
-                        SVProgressHUD.showSuccess(withStatus: "Success")
-                        self?.navigateToHomeScreen()
-                    case .failure(let error):
-                        print("error: \(error)")
-                        SVProgressHUD.showError(withStatus: "Failure")
+                case .success(let user):
+                    self?.userResponse = user
+                    print(self?.userResponse)
+                    SVProgressHUD.showSuccess(withStatus: "Success")
+                    self?.navigateToHomeScreen()
+                case .failure(let error):
+                    print("error: \(error)")
+                    SVProgressHUD.showError(withStatus: "Failure")
                 }
             }
     }
@@ -123,14 +102,14 @@ private extension LoginViewController{
                 
                 switch response.result{
                 
-                    case .success(let user):
-                        print("succes: \(user.user.email)")
-                        let headers = response.response?.headers.dictionary ?? [:]
-                        self?.handleSuccesfulLogin(for: user.user, headers: headers)
-                        self?.navigateToHomeScreen()
-                    case .failure(let error):
-                        print("error: \(error)")
-                        SVProgressHUD.showError(withStatus: "Failure")
+                case .success(let user):
+                    print("succes: \(user.user.email)")
+                    let headers = response.response?.headers.dictionary ?? [:]
+                    self?.handleSuccesfulLogin(for: user.user, headers: headers)
+                    self?.navigateToHomeScreen()
+                case .failure(let error):
+                    print("error: \(error)")
+                    SVProgressHUD.showError(withStatus: "Failure")
                 }
             }
     }
@@ -152,7 +131,7 @@ private extension LoginViewController{
     }
     
     private func configureUI(){
-
+        
         emailTextfield.attributedPlaceholder = NSAttributedString(
             string: "Email",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
@@ -162,7 +141,7 @@ private extension LoginViewController{
         loginButton.layer.cornerRadius = 21.5
         loginButton.clipsToBounds = true
     }
-
+    
     
     private func checkInputs(){
         if let email = emailTextfield.text,
@@ -186,31 +165,20 @@ private extension LoginViewController{
     
     private func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
+        
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
-
-
+    
+    
     // MARK: - IBActions
+    
+}
 
 private extension LoginViewController{
     
     @IBAction func rememberCheckButtonActionHandler() {
         rememberCheckButton.isSelected.toggle()
-    }
-    
-    @IBAction func emailTextfieldEditingDidEndActionHandler() {
-        guard let input: String = emailTextfield.text else { return }
-        if input.isValidEmail() {
-            loginButton.isEnabled = true
-            loginButton.backgroundColor = .white
-            loginButton.setTitleColor(.myPurple, for: .normal)
-        } else {
-            loginButton.isEnabled = false
-            loginButton.backgroundColor = .white.withAlphaComponent(0.3)
-            loginButton.setTitleColor(.white.withAlphaComponent(0.4), for: .normal)
-        }
     }
     
     @IBAction func seePasswordButtonActionHandler() {

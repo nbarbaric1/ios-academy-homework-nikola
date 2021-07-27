@@ -104,7 +104,6 @@
 			path = Splashscreen;
 			sourceTree = "<group>";
 		};
-
 		42424AFB26A97CD1003E96FC /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,7 +111,8 @@
 				42424AFE26A97D08003E96FC /* HomeViewController.swift */,
 			);
 			path = Home;
-
+			sourceTree = "<group>";
+		};
 		42424B0226AC5774003E96FC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +121,6 @@
 				42424B0726AC5A74003E96FC /* String+Verifications.swift */,
 			);
 			path = Extensions;
-
 			sourceTree = "<group>";
 		};
 		427C5F6E269C6D95000BC489 /* Login */ = {
