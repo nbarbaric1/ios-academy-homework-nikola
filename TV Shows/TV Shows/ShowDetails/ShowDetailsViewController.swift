@@ -24,7 +24,10 @@ class ShowDetailsViewController: UIViewController {
 }
 
 extension ShowDetailsViewController : UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 { return 600 }
+        return 140
+    }
 }
 
 extension ShowDetailsViewController : UITableViewDataSource {
