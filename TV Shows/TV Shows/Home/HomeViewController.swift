@@ -9,36 +9,94 @@
 
 import UIKit
 import Alamofire
+import SVProgressHUD
 
-class HomeViewController : UIViewController{
+class HomeViewController : UIViewController {
     
+    // MARK: - IBOutlets
+    
+    @IBOutlet private weak var showsTableView: UITableView!
     
     // MARK: - Properties
-    @IBOutlet weak var authInfoa: UILabel!
-    @IBOutlet weak var userResponsea: UILabel!
     
     var userResponse: UserResponse?
     var authInfo: AuthInfo?
+    var shows: [Show]?
     
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("userResponse in HomeVC: \(userResponse)")
-        print("Authinfo in HomeVC:  \(authInfo)")
-        
-        
-        AF
-        .request(
-            "https://tv-shows.infinum.academy/shows",
-            method: .get,
-            parameters: ["page": "1", "items": "100"], // pagination arguments
-            headers: HTTPHeaders(authInfo.headers)
-        )
-        .validate()
-        .responseDecodable(of: ShowsResponse.self) { }
-        
+        getShowsFromApi()
+        setupTableView()
+    }
+}
+
+// MARK: - TableView
+    // MARK: - TableView Delegate
+extension HomeViewController: UITableViewDelegate {
+    
+}
+    // MARK: - TableView DataSource
+extension HomeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return shows?.count ?? 0
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let shows = shows else { return UITableViewCell() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TVShowTableViewCell.self), for: indexPath) as! TVShowTableViewCell
+        cell.configure(with: shows[indexPath.row].title)
+        return cell
+    }
+}
     
+// MARK: - Private functions
+
+private extension HomeViewController {
+    func alertError() {
+        let alertController = UIAlertController(title: "Error", message: "An error occurred. Please check your connection and try again.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
+    }
+    
+    func getShowsFromApi() {
+        SVProgressHUD.show()
+        guard let userResponse = userResponse,
+              let authInfo = authInfo
+        else { alertError(); return }
+        
+        AF
+            .request(
+                "https://tv-shows.infinum.academy/shows",
+                method: .get,
+                parameters: ["page": "1", "items": "100"], // pagination arguments
+                headers: HTTPHeaders(authInfo.headers)
+            )
+            .validate()
+            .responseDecodable(of: ShowsResponse.self) { [weak self] response in
+                guard let self = self else { return }
+                
+                switch response.result {
+                
+                case .success(let showsResponse):
+                    print("SUCCES in HomeVC: \(showsResponse)")
+                    SVProgressHUD.showSuccess(withStatus: "Success")
+                    self.shows = showsResponse.shows
+                    self.showsTableView.reloadData()
+                case .failure(let error):
+                    print("error in HomeVC: \(error)")
+                    SVProgressHUD.dismiss()
+                    self.alertError()
+                }
+            }
+    }
+    
+    func setupTableView() {
+        showsTableView.estimatedRowHeight = 110
+        showsTableView.rowHeight = UITableView.automaticDimension
+        showsTableView.delegate = self
+        showsTableView.dataSource = self
+    }
 }

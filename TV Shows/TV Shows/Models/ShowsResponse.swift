@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct ShowsResponse: Codable {
+struct ShowsResponse: Decodable {
     let shows: [Show]
-    let meta: [Meta]
+    let meta: Meta
 }
 
-struct Show: Codable {
+struct Show: Decodable {
     let id: String
-    let averageRating: String
-    let description: String
+    let averageRating: Int?
+    let description: String?
     let imageUrl: String
     let numberOfReviews: Int
     let title: String
@@ -30,6 +30,13 @@ struct Show: Codable {
     }
 }
 
-struct Meta: Codable {
-    
+struct Meta: Decodable {
+    let pagination: Pagination
+}
+
+struct Pagination: Decodable {
+    let count: Int
+    let page: Int
+    let items: Int
+    let pages: Int
 }
