@@ -19,6 +19,11 @@
 		42424B0B26AF57DA003E96FC /* String+Verifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0A26AF57DA003E96FC /* String+Verifications.swift */; };
 		42424B0D26AF5804003E96FC /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0C26AF5804003E96FC /* UIColor+AppColors.swift */; };
 		42424B0F26AF5840003E96FC /* UIViewController+KeyboardHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0E26AF5840003E96FC /* UIViewController+KeyboardHandling.swift */; };
+		4259E94926B1E5FD007EEC06 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E94826B1E5FD007EEC06 /* RatingView.swift */; };
+		4259E94C26B1E767007EEC06 /* ShowDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4259E94B26B1E767007EEC06 /* ShowDetails.storyboard */; };
+		4259E94E26B1E7A0007EEC06 /* ShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E94D26B1E7A0007EEC06 /* ShowDetailsViewController.swift */; };
+		4259E95026B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E94F26B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift */; };
+		4259E95426B20690007EEC06 /* ShowDetailOthersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E95326B20690007EEC06 /* ShowDetailOthersTableViewCell.swift */; };
 		427C5F70269C6DCB000BC489 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 427C5F6F269C6DCB000BC489 /* Login.storyboard */; };
 		427C5F72269C6DE9000BC489 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427C5F71269C6DE9000BC489 /* LoginViewController.swift */; };
 		42EC3C1626B0FD440053BE57 /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */; };
@@ -42,6 +47,11 @@
 		42424B0A26AF57DA003E96FC /* String+Verifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Verifications.swift"; sourceTree = "<group>"; };
 		42424B0C26AF5804003E96FC /* UIColor+AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		42424B0E26AF5840003E96FC /* UIViewController+KeyboardHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+KeyboardHandling.swift"; sourceTree = "<group>"; };
+		4259E94826B1E5FD007EEC06 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		4259E94B26B1E767007EEC06 /* ShowDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowDetails.storyboard; sourceTree = "<group>"; };
+		4259E94D26B1E7A0007EEC06 /* ShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewController.swift; sourceTree = "<group>"; };
+		4259E94F26B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailFirstTableViewCell.swift; sourceTree = "<group>"; };
+		4259E95326B20690007EEC06 /* ShowDetailOthersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailOthersTableViewCell.swift; sourceTree = "<group>"; };
 		427C5F6F269C6DCB000BC489 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		427C5F71269C6DE9000BC489 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
@@ -81,7 +91,10 @@
 		420672AB26975F63002306DB /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
+				4259E94A26B1E73B007EEC06 /* ShowDetails */,
+				4259E94826B1E5FD007EEC06 /* RatingView.swift */,
 				42262D8A26B017C000E938B5 /* Models */,
+				42EC3C1426B0FCFC0053BE57 /* TableViewCells */,
 				42424B0926AF575B003E96FC /* Extensions */,
 				42424AFB26A97CD1003E96FC /* Home */,
 				4239429D26A709BD00B8141D /* Splashscreen */,
@@ -115,7 +128,6 @@
 		42424AFB26A97CD1003E96FC /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				42EC3C1426B0FCFC0053BE57 /* TableViewCells */,
 				42424AFC26A97CF6003E96FC /* Home.storyboard */,
 				42424AFE26A97D08003E96FC /* HomeViewController.swift */,
 			);
@@ -132,6 +144,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		4259E94A26B1E73B007EEC06 /* ShowDetails */ = {
+			isa = PBXGroup;
+			children = (
+				4259E94B26B1E767007EEC06 /* ShowDetails.storyboard */,
+				4259E94D26B1E7A0007EEC06 /* ShowDetailsViewController.swift */,
+			);
+			path = ShowDetails;
+			sourceTree = "<group>";
+		};
 		427C5F6E269C6D95000BC489 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */,
+				4259E94F26B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift */,
+				4259E95326B20690007EEC06 /* ShowDetailOthersTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -225,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4259E94C26B1E767007EEC06 /* ShowDetails.storyboard in Resources */,
 				420672B926975F65002306DB /* LaunchScreen.storyboard in Resources */,
 				42424AFD26A97CF6003E96FC /* Home.storyboard in Resources */,
 				420672B626975F65002306DB /* Assets.xcassets in Resources */,
@@ -282,9 +306,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4259E94926B1E5FD007EEC06 /* RatingView.swift in Sources */,
 				42262D8E26B018B000E938B5 /* ShowsResponse.swift in Sources */,
 				42424B0126AA2223003E96FC /* User.swift in Sources */,
+				4259E95026B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift in Sources */,
 				42EC3C1626B0FD440053BE57 /* TVShowTableViewCell.swift in Sources */,
+				4259E94E26B1E7A0007EEC06 /* ShowDetailsViewController.swift in Sources */,
+				4259E95426B20690007EEC06 /* ShowDetailOthersTableViewCell.swift in Sources */,
 				427C5F72269C6DE9000BC489 /* LoginViewController.swift in Sources */,
 				42424B0B26AF57DA003E96FC /* String+Verifications.swift in Sources */,
 				420672AD26975F63002306DB /* AppDelegate.swift in Sources */,

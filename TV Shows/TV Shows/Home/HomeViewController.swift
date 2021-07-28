@@ -27,15 +27,24 @@ class HomeViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         getShowsFromApi()
         setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        configureUI()
     }
 }
 
 // MARK: - TableView
     // MARK: - TableView Delegate
 extension HomeViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let shows = shows else { return }
+        navigateToDetails(for: shows[indexPath.row])
+    }
 }
     // MARK: - TableView DataSource
 extension HomeViewController: UITableViewDataSource {
@@ -54,6 +63,20 @@ extension HomeViewController: UITableViewDataSource {
 // MARK: - Private functions
 
 private extension HomeViewController {
+    func configureUI() {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    func navigateToDetails(for show: Show) {
+        let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
+        let showDetailsViewController = storyboard
+            .instantiateViewController(
+                withIdentifier: String(describing: ShowDetailsViewController.self)
+            ) as! ShowDetailsViewController
+        showDetailsViewController.show = show
+        navigationController?.pushViewController(showDetailsViewController, animated: true)
+    }
+    
     func alertError() {
         let alertController = UIAlertController(title: "Error", message: "An error occurred. Please check your connection and try again.", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
