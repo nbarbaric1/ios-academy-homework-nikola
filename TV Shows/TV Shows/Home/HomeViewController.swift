@@ -46,7 +46,7 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let shows = shows else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TVShowTableViewCell.self), for: indexPath) as! TVShowTableViewCell
-        cell.configure(with: shows[indexPath.row].title)
+        cell.configure(with: shows[indexPath.row])
         return cell
     }
 }
@@ -94,7 +94,7 @@ private extension HomeViewController {
     }
     
     func setupTableView() {
-        showsTableView.estimatedRowHeight = 110
+        showsTableView.estimatedRowHeight = 120
         showsTableView.rowHeight = UITableView.automaticDimension
         showsTableView.delegate = self
         showsTableView.dataSource = self

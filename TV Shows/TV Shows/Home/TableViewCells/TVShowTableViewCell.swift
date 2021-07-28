@@ -6,17 +6,25 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TVShowTableViewCell: UITableViewCell {
     
     @IBOutlet private var showNameLabel: UILabel!
+    @IBOutlet private var showImageView: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        showNameLabel.textColor = .red
     }
     
-    func configure(with showName: String){
-        showNameLabel.text = showName
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        showNameLabel.text = ""
+        
+    }
+    
+    func configure(with show: Show){
+        showNameLabel.text = show.title
+        showImageView.kf.setImage(with: URL(string: show.imageUrl))
     }
 }
