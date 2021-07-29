@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ShowDetailOthersTableViewCell: UITableViewCell {
     
@@ -17,6 +18,8 @@ class ShowDetailOthersTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        photoOfReviewerImageView.layer.cornerRadius = 20
+        photoOfReviewerImageView.clipsToBounds = true
     }
     
     override func prepareForReuse() {
@@ -36,6 +39,4 @@ class ShowDetailOthersTableViewCell: UITableViewCell {
             photoOfReviewerImageView.kf.setImage(with: URL(string: image))
         }
     }
-
-
 }

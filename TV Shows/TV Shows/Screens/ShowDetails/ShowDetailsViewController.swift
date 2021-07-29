@@ -18,6 +18,7 @@ class ShowDetailsViewController: UIViewController {
     var reviews: [Review]?
     
     @IBOutlet private weak var showDetailsTableView: UITableView!
+    @IBOutlet private weak var writeReviewButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,13 @@ class ShowDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         configureUI()
+    }
+   
+}
+
+extension ShowDetailsViewController {
+    @IBAction func writeReviewButtonActionHandler() {
+        navigateToWriteReview()
     }
 }
 
@@ -63,6 +71,7 @@ extension ShowDetailsViewController : UITableViewDataSource {
 private extension ShowDetailsViewController {
     func configureUI() {
         navigationController?.isNavigationBarHidden = false
+        writeReviewButton.makeRounded(withCornerRadius: 20)
     }
     
     func getReviewsFromApi(for id: String) {
@@ -102,5 +111,17 @@ private extension ShowDetailsViewController {
                     //self.alertError()
                 }
             }
+    }
+    
+    func navigateToWriteReview() {
+        let storyboard = UIStoryboard(name: "WriteReview", bundle: nil)
+        let writeReviewViewController = storyboard
+            .instantiateViewController(
+                withIdentifier: String(describing: WriteReviewViewController.self)
+            ) as! WriteReviewViewController
+        writeReviewViewController.show = show
+        writeReviewViewController.authInfo = authInfo
+        writeReviewViewController.userResponse = userResponse
+        navigationController?.present(writeReviewViewController, animated: true, completion: nil)
     }
 }

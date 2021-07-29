@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9NJ-al-Hfq">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowDetailFirstTableViewCell" rowHeight="600" id="qD8-Yx-Izo" customClass="ShowDetailFirstTableViewCell" customModule="TV_Shows" customModuleProvider="target">
@@ -42,11 +42,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AOg-Fz-d3d" customClass="RatingView" customModule="TV_Shows" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="461.5" width="150" height="60"/>
+                                                    <rect key="frame" x="20" y="461.5" width="200" height="60"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="1oa-s4-B6s"/>
                                                         <constraint firstAttribute="height" constant="60" id="RpD-KJ-odY"/>
-                                                        <constraint firstAttribute="width" constant="150" id="WR3-hN-6zd"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -138,18 +138,35 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="unf-O4-ShX"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zP6-rx-wxp">
+                                <rect key="frame" x="20" y="812" width="374" height="50"/>
+                                <color key="backgroundColor" red="0.32156862749999998" green="0.21176470589999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="dgj-7N-Dj8"/>
+                                </constraints>
+                                <state key="normal" title="Write a review">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="writeReviewButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jGj-ri-ZAL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="9NJ-al-Hfq" secondAttribute="bottom" id="L7L-RL-agB"/>
+                            <constraint firstItem="zP6-rx-wxp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="1AR-B9-mEf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="9NJ-al-Hfq" secondAttribute="bottom" constant="50" id="L7L-RL-agB"/>
+                            <constraint firstItem="zP6-rx-wxp" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="Reh-f6-h5Z"/>
                             <constraint firstItem="9NJ-al-Hfq" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="SX6-Fw-MxZ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9NJ-al-Hfq" secondAttribute="trailing" id="ZED-yg-uDS"/>
                             <constraint firstItem="9NJ-al-Hfq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="r4Y-q4-ew7"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="zP6-rx-wxp" secondAttribute="trailing" constant="20" id="skb-Nw-GHC"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="showDetailsTableView" destination="9NJ-al-Hfq" id="oFp-bb-YGV"/>
+                        <outlet property="writeReviewButton" destination="zP6-rx-wxp" id="4tU-2S-QRr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -163,9 +180,6 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
