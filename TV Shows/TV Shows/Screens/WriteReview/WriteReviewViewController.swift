@@ -11,13 +11,19 @@ import Alamofire
 
 class WriteReviewViewController: UIViewController {
     
+    // MARK: - Properties
+    
     var show: Show?
     var userResponse: UserResponse?
     var authInfo: AuthInfo?
     
+    // MARK: - IBOutlets
+    
     @IBOutlet private weak var commentTextView: UITextView!
     @IBOutlet private weak var submitButton: UIButton!
     @IBOutlet private weak var ratingView: RatingView!
+    
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +31,16 @@ class WriteReviewViewController: UIViewController {
     }
 }
 
+// MARK: IBActions
 extension WriteReviewViewController {
     @IBAction func submitButtonActionHandler() {
-        guard let show = show else { return }
+        guard let show = show,
+              let authInfo = authInfo
+        else { return }
         SVProgressHUD.show()
         let params : [String: String] = [
-            "comment" : commentTextView.text,
             "rating" : String(ratingView.rating),
+            "comment" : commentTextView.text,
             "show_id" : show.id
         ]
         
@@ -40,15 +49,15 @@ extension WriteReviewViewController {
                 "https://tv-shows.infinum.academy/reviews",
                 method: .post,
                 parameters: params,
-                encoder: JSONParameterEncoder.default)
+                headers: HTTPHeaders(authInfo.headers))
             .validate()
-            .responseDecodable(of: ReviewsResponse.self) { [weak self] response in
+            .responseDecodable(of: WriteReviewResponse.self) { [weak self] response in
                 guard let self = self else { return }
                 
                 switch response.result{
-                case .success(let reviewResponse):
+                case .success(let writeReviewResponse):
                     print("success WRVC")
-                    SVProgressHUD.showSuccess(withStatus: "yes")
+                    SVProgressHUD.showSuccess(withStatus: "Commented")
                 case .failure(let error):
                     print("error WRVC: \(error)")
                     SVProgressHUD.dismiss()
@@ -56,18 +65,21 @@ extension WriteReviewViewController {
             }
     }
 }
-
+// TODO: Check this
 extension WriteReviewViewController : RatingViewDelegate {
     func didChangeRating(_ rating: Int) { // TODO: check
         checkInputs()
     }
 }
 
+// MARK: UITextView Delegate
 extension WriteReviewViewController : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         checkInputs()
     }
 }
+
+// MARK: - Private functions
 
 private extension WriteReviewViewController {
     func configureUI() {

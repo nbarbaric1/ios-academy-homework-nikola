@@ -30,6 +30,7 @@
 		4259E95D26B23412007EEC06 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E95C26B23412007EEC06 /* WriteReviewViewController.swift */; };
 		4259E96026B2431E007EEC06 /* UITextView+Modifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E95F26B2431E007EEC06 /* UITextView+Modifications.swift */; };
 		4259E96226B247BF007EEC06 /* UIButton+Modifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E96126B247BF007EEC06 /* UIButton+Modifications.swift */; };
+		4259E96426B2635B007EEC06 /* WriteReviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E96326B2635B007EEC06 /* WriteReviewResponse.swift */; };
 		427C5F70269C6DCB000BC489 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 427C5F6F269C6DCB000BC489 /* Login.storyboard */; };
 		427C5F72269C6DE9000BC489 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427C5F71269C6DE9000BC489 /* LoginViewController.swift */; };
 		42EC3C1626B0FD440053BE57 /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */; };
@@ -64,6 +65,7 @@
 		4259E95C26B23412007EEC06 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
 		4259E95F26B2431E007EEC06 /* UITextView+Modifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Modifications.swift"; sourceTree = "<group>"; };
 		4259E96126B247BF007EEC06 /* UIButton+Modifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Modifications.swift"; sourceTree = "<group>"; };
+		4259E96326B2635B007EEC06 /* WriteReviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewResponse.swift; sourceTree = "<group>"; };
 		427C5F6F269C6DCB000BC489 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		427C5F71269C6DE9000BC489 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				42262D8B26B017EB00E938B5 /* AuthInfo.swift */,
 				42262D8D26B018B000E938B5 /* ShowsResponse.swift */,
 				4259E95526B21456007EEC06 /* ReviewsResponse.swift */,
+				4259E96326B2635B007EEC06 /* WriteReviewResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				42262D8E26B018B000E938B5 /* ShowsResponse.swift in Sources */,
 				42424B0126AA2223003E96FC /* User.swift in Sources */,
 				4259E95026B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift in Sources */,
+				4259E96426B2635B007EEC06 /* WriteReviewResponse.swift in Sources */,
 				42EC3C1626B0FD440053BE57 /* TVShowTableViewCell.swift in Sources */,
 				4259E95826B231B4007EEC06 /* UIView+Modifications.swift in Sources */,
 				4259E94E26B1E7A0007EEC06 /* ShowDetailsViewController.swift in Sources */,

@@ -11,20 +11,27 @@ import SVProgressHUD
 
 class ShowDetailsViewController: UIViewController {
     
+    // MARK: - Properties
+    
     var show: Show?
     var userResponse: UserResponse?
     var authInfo: AuthInfo?
     var reviewsResponse: ReviewsResponse?
     var reviews: [Review]?
     
+    // MARK: - IBOutlets
+    
     @IBOutlet private weak var showDetailsTableView: UITableView!
     @IBOutlet private weak var writeReviewButton: UIButton!
 
+    // MARK: - Lifecycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         getReviewsFromApi(for: show!.id)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         configureUI()
@@ -32,19 +39,23 @@ class ShowDetailsViewController: UIViewController {
    
 }
 
+// MARK: - IBActions
+
 extension ShowDetailsViewController {
     @IBAction func writeReviewButtonActionHandler() {
         navigateToWriteReview()
     }
 }
 
+// MARK: TABLE VIEW
+// MARK: - TableView Delegate
 extension ShowDetailsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 { return 600 }
         return 140
     }
 }
-
+// MARK: - TableView Datasource
 extension ShowDetailsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return show?.numberOfReviews ?? 0
@@ -67,7 +78,7 @@ extension ShowDetailsViewController : UITableViewDataSource {
     
     
 }
-
+// MARK: - Private functions
 private extension ShowDetailsViewController {
     func configureUI() {
         navigationController?.isNavigationBarHidden = false
