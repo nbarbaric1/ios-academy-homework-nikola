@@ -43,7 +43,7 @@
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AOg-Fz-d3d" customClass="RatingView" customModule="TV_Shows" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="461.5" width="150" height="60"/>
-                                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="RpD-KJ-odY"/>
                                                         <constraint firstAttribute="width" constant="150" id="WR3-hN-6zd"/>
@@ -64,6 +64,7 @@
                                         <connections>
                                             <outlet property="showDescriptionLabel" destination="HI3-F3-WSl" id="MK1-ZT-yAo"/>
                                             <outlet property="showImageView" destination="hkz-CY-ppy" id="RMI-73-L9U"/>
+                                            <outlet property="showRating" destination="AOg-Fz-d3d" id="7po-bH-Kn7"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowDetailOthersTableViewCell" rowHeight="140" id="Q6c-p5-YIS" customClass="ShowDetailOthersTableViewCell" customModule="TV_Shows" customModuleProvider="target">
@@ -88,7 +89,7 @@
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffm-bJ-M3L" customClass="RatingView" customModule="TV_Shows" customModuleProvider="target">
                                                     <rect key="frame" x="90" y="46" width="314" height="22"/>
-                                                    <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="vlO-iX-k1k"/>
                                                     </constraints>
@@ -124,6 +125,12 @@
                                                 <constraint firstItem="obD-Gh-lD2" firstAttribute="top" secondItem="fyB-Cr-iwr" secondAttribute="top" constant="15" id="s9A-Dr-rCh"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="commentLabel" destination="d2a-7l-o6H" id="ro8-WK-VP9"/>
+                                            <outlet property="emailOfReviewerLabel" destination="r4l-3r-0ZK" id="q3P-0T-gSc"/>
+                                            <outlet property="photoOfReviewerImageView" destination="obD-Gh-lD2" id="QY3-Qa-ZqW"/>
+                                            <outlet property="ratingView" destination="ffm-bJ-M3L" id="mRS-dk-ZCg"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -157,14 +164,8 @@
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

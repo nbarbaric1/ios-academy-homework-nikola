@@ -8,6 +8,12 @@
 import UIKit
 
 class ShowDetailOthersTableViewCell: UITableViewCell {
+    
+    @IBOutlet private weak var emailOfReviewerLabel: UILabel!
+    @IBOutlet private weak var photoOfReviewerImageView: UIImageView!
+    @IBOutlet private weak var commentLabel: UILabel!
+    @IBOutlet private weak var ratingView: RatingView!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -15,10 +21,20 @@ class ShowDetailOthersTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        commentLabel.text = ""
+        emailOfReviewerLabel.text = ""
     }
 
-    func configure(with show: Show) {
+    func configure(with review: Review) {
+        commentLabel.text = review.comment
+        emailOfReviewerLabel.text = review.user.email
+        ratingView.configure(withStyle: .small)
+        ratingView.isEnabled = false
+        ratingView.setRoundedRating(Double(review.rating))
         
+        if let image = review.user.imageUrl {
+            photoOfReviewerImageView.kf.setImage(with: URL(string: image))
+        }
     }
 
 

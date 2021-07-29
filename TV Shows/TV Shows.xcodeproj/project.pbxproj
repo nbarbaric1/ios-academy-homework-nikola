@@ -24,6 +24,7 @@
 		4259E94E26B1E7A0007EEC06 /* ShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E94D26B1E7A0007EEC06 /* ShowDetailsViewController.swift */; };
 		4259E95026B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E94F26B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift */; };
 		4259E95426B20690007EEC06 /* ShowDetailOthersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E95326B20690007EEC06 /* ShowDetailOthersTableViewCell.swift */; };
+		4259E95626B21456007EEC06 /* ReviewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259E95526B21456007EEC06 /* ReviewsResponse.swift */; };
 		427C5F70269C6DCB000BC489 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 427C5F6F269C6DCB000BC489 /* Login.storyboard */; };
 		427C5F72269C6DE9000BC489 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427C5F71269C6DE9000BC489 /* LoginViewController.swift */; };
 		42EC3C1626B0FD440053BE57 /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */; };
@@ -52,6 +53,7 @@
 		4259E94D26B1E7A0007EEC06 /* ShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewController.swift; sourceTree = "<group>"; };
 		4259E94F26B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailFirstTableViewCell.swift; sourceTree = "<group>"; };
 		4259E95326B20690007EEC06 /* ShowDetailOthersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailOthersTableViewCell.swift; sourceTree = "<group>"; };
+		4259E95526B21456007EEC06 /* ReviewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsResponse.swift; sourceTree = "<group>"; };
 		427C5F6F269C6DCB000BC489 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		427C5F71269C6DE9000BC489 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				42424B0026AA2223003E96FC /* User.swift */,
 				42262D8B26B017EB00E938B5 /* AuthInfo.swift */,
 				42262D8D26B018B000E938B5 /* ShowsResponse.swift */,
+				4259E95526B21456007EEC06 /* ReviewsResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				420672AD26975F63002306DB /* AppDelegate.swift in Sources */,
 				42424B0F26AF5840003E96FC /* UIViewController+KeyboardHandling.swift in Sources */,
 				42424AFF26A97D08003E96FC /* HomeViewController.swift in Sources */,
+				4259E95626B21456007EEC06 /* ReviewsResponse.swift in Sources */,
 				42424B0D26AF5804003E96FC /* UIColor+AppColors.swift in Sources */,
 				42262D8C26B017EB00E938B5 /* AuthInfo.swift in Sources */,
 			);

@@ -42,8 +42,11 @@ class HomeViewController : UIViewController {
     // MARK: - TableView Delegate
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let shows = shows else { return }
-        navigateToDetails(for: shows[indexPath.row])
+        guard let shows = shows,
+              let userResponse = userResponse,
+              let authInfo = authInfo
+        else { return }
+        navigateToDetails(for: shows[indexPath.row], userResponse: userResponse, authInfo: authInfo)
     }
 }
     // MARK: - TableView DataSource
@@ -67,13 +70,15 @@ private extension HomeViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
-    func navigateToDetails(for show: Show) {
+    func navigateToDetails(for show: Show, userResponse: UserResponse, authInfo: AuthInfo) {
         let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
         let showDetailsViewController = storyboard
             .instantiateViewController(
                 withIdentifier: String(describing: ShowDetailsViewController.self)
             ) as! ShowDetailsViewController
         showDetailsViewController.show = show
+        showDetailsViewController.authInfo = authInfo
+        showDetailsViewController.userResponse = userResponse
         navigationController?.pushViewController(showDetailsViewController, animated: true)
     }
     

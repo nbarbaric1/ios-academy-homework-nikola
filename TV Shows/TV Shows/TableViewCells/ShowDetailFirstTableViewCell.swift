@@ -10,8 +10,9 @@ import Kingfisher
 
 class ShowDetailFirstTableViewCell: UITableViewCell {
     
-    @IBOutlet private var showImageView: UIImageView!
-    @IBOutlet private var showDescriptionLabel: UILabel!
+    @IBOutlet private weak var showImageView: UIImageView!
+    @IBOutlet private weak var showDescriptionLabel: UILabel!
+    @IBOutlet private weak var showRating: RatingView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +26,16 @@ class ShowDetailFirstTableViewCell: UITableViewCell {
     func configure(with show: Show) {
         showImageView.kf.setImage(with: URL(string: show.imageUrl))
         showDescriptionLabel.text = show.description
+        
+        if let averageRating = show.averageRating {
+            showRating.isHidden = false
+            showRating.configure(withStyle: .large)
+            showRating.isEnabled = false
+            showRating.setRoundedRating(Double(averageRating))
+        } else {
+            showRating.isHidden = true
+        }
+        
     }
 
 }
