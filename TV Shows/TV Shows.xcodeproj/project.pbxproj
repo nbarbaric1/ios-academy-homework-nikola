@@ -13,6 +13,7 @@
 		42262D8C26B017EB00E938B5 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42262D8B26B017EB00E938B5 /* AuthInfo.swift */; };
 		42262D8E26B018B000E938B5 /* ShowsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42262D8D26B018B000E938B5 /* ShowsResponse.swift */; };
 		4239429F26A70A0500B8141D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4239429E26A70A0500B8141D /* Launch Screen.storyboard */; };
+		423BF7EE26B371AD00F3F494 /* UIScrollView+KeyboardHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423BF7ED26B371AD00F3F494 /* UIScrollView+KeyboardHandling.swift */; };
 		42424AFD26A97CF6003E96FC /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42424AFC26A97CF6003E96FC /* Home.storyboard */; };
 		42424AFF26A97D08003E96FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424AFE26A97D08003E96FC /* HomeViewController.swift */; };
 		42424B0126AA2223003E96FC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0026AA2223003E96FC /* User.swift */; };
@@ -48,6 +49,7 @@
 		42262D8B26B017EB00E938B5 /* AuthInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInfo.swift; sourceTree = "<group>"; };
 		42262D8D26B018B000E938B5 /* ShowsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsResponse.swift; sourceTree = "<group>"; };
 		4239429E26A70A0500B8141D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		423BF7ED26B371AD00F3F494 /* UIScrollView+KeyboardHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+KeyboardHandling.swift"; sourceTree = "<group>"; };
 		42424AFC26A97CF6003E96FC /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		42424AFE26A97D08003E96FC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		42424B0026AA2223003E96FC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				4259E95726B231B4007EEC06 /* UIView+Modifications.swift */,
 				4259E95F26B2431E007EEC06 /* UITextView+Modifications.swift */,
 				4259E96126B247BF007EEC06 /* UIButton+Modifications.swift */,
+				423BF7ED26B371AD00F3F494 /* UIScrollView+KeyboardHandling.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				4259E95026B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift in Sources */,
 				4259E96426B2635B007EEC06 /* WriteReviewResponse.swift in Sources */,
 				42EC3C1626B0FD440053BE57 /* TVShowTableViewCell.swift in Sources */,
+				423BF7EE26B371AD00F3F494 /* UIScrollView+KeyboardHandling.swift in Sources */,
 				4259E95826B231B4007EEC06 /* UIView+Modifications.swift in Sources */,
 				4259E94E26B1E7A0007EEC06 /* ShowDetailsViewController.swift in Sources */,
 				4259E95426B20690007EEC06 /* ShowDetailOthersTableViewCell.swift in Sources */,

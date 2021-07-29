@@ -21,6 +21,7 @@ class LoginViewController : UIViewController {
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var seePasswordButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     // MARK: - Properties
     
@@ -33,6 +34,10 @@ class LoginViewController : UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         configureUI()
+    }
+    
+    deinit {
+        scrollView.deleteObservers()
     }
 }
 
@@ -50,6 +55,7 @@ private extension LoginViewController {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
         loginButton.layer.cornerRadius = 22
         loginButton.clipsToBounds = true
+        scrollView.handleKeyboard()
     }
 }
 
