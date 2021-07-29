@@ -11,9 +11,13 @@
 		420672B626975F65002306DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 420672B526975F65002306DB /* Assets.xcassets */; };
 		420672B926975F65002306DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 420672B726975F65002306DB /* LaunchScreen.storyboard */; };
 		4239429F26A70A0500B8141D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4239429E26A70A0500B8141D /* Launch Screen.storyboard */; };
-		42424B0426AC5792003E96FC /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0326AC5792003E96FC /* UIColor+AppColors.swift */; };
-		42424B0626AC580E003E96FC /* UIViewController+KeyboardHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0526AC580E003E96FC /* UIViewController+KeyboardHandling.swift */; };
-		42424B0826AC5A74003E96FC /* String+Verifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0726AC5A74003E96FC /* String+Verifications.swift */; };
+
+		42424AFD26A97CF6003E96FC /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42424AFC26A97CF6003E96FC /* Home.storyboard */; };
+		42424AFF26A97D08003E96FC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424AFE26A97D08003E96FC /* HomeViewController.swift */; };
+		42424B0126AA2223003E96FC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0026AA2223003E96FC /* User.swift */; };
+		42424B0B26AF57DA003E96FC /* String+Verifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0A26AF57DA003E96FC /* String+Verifications.swift */; };
+		42424B0D26AF5804003E96FC /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0C26AF5804003E96FC /* UIColor+AppColors.swift */; };
+		42424B0F26AF5840003E96FC /* UIViewController+KeyboardHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42424B0E26AF5840003E96FC /* UIViewController+KeyboardHandling.swift */; };
 		427C5F70269C6DCB000BC489 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 427C5F6F269C6DCB000BC489 /* Login.storyboard */; };
 		427C5F72269C6DE9000BC489 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427C5F71269C6DE9000BC489 /* LoginViewController.swift */; };
 		B116EEA007E847624584A62B /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33BFA9C0E4879027F658BAD9 /* Pods_TV_Shows.framework */; };
@@ -28,9 +32,13 @@
 		420672B826975F65002306DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		420672BA26975F65002306DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4239429E26A70A0500B8141D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		42424B0326AC5792003E96FC /* UIColor+AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
-		42424B0526AC580E003E96FC /* UIViewController+KeyboardHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+KeyboardHandling.swift"; sourceTree = "<group>"; };
-		42424B0726AC5A74003E96FC /* String+Verifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Verifications.swift"; sourceTree = "<group>"; };
+
+		42424AFC26A97CF6003E96FC /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		42424AFE26A97D08003E96FC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		42424B0026AA2223003E96FC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		42424B0A26AF57DA003E96FC /* String+Verifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Verifications.swift"; sourceTree = "<group>"; };
+		42424B0C26AF5804003E96FC /* UIColor+AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
+		42424B0E26AF5840003E96FC /* UIViewController+KeyboardHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+KeyboardHandling.swift"; sourceTree = "<group>"; };
 		427C5F6F269C6DCB000BC489 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		427C5F71269C6DE9000BC489 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DBAF33CE8F73495F6D1C1E84 /* Pods-TV Shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.debug.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.debug.xcconfig"; sourceTree = "<group>"; };
@@ -69,7 +77,11 @@
 		420672AB26975F63002306DB /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
+				42424B0926AF575B003E96FC /* Extensions */,
+				42424AFB26A97CD1003E96FC /* Home */,
+
 				42424B0226AC5774003E96FC /* Extensions */,
+
 				4239429D26A709BD00B8141D /* Splashscreen */,
 				427C5F6E269C6D95000BC489 /* Login */,
 				420672AC26975F63002306DB /* AppDelegate.swift */,
@@ -88,12 +100,21 @@
 			path = Splashscreen;
 			sourceTree = "<group>";
 		};
-		42424B0226AC5774003E96FC /* Extensions */ = {
+		42424AFB26A97CD1003E96FC /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				42424B0326AC5792003E96FC /* UIColor+AppColors.swift */,
-				42424B0526AC580E003E96FC /* UIViewController+KeyboardHandling.swift */,
-				42424B0726AC5A74003E96FC /* String+Verifications.swift */,
+				42424AFC26A97CF6003E96FC /* Home.storyboard */,
+				42424AFE26A97D08003E96FC /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		42424B0926AF575B003E96FC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				42424B0A26AF57DA003E96FC /* String+Verifications.swift */,
+				42424B0C26AF5804003E96FC /* UIColor+AppColors.swift */,
+				42424B0E26AF5840003E96FC /* UIViewController+KeyboardHandling.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -103,6 +124,7 @@
 			children = (
 				427C5F6F269C6DCB000BC489 /* Login.storyboard */,
 				427C5F71269C6DE9000BC489 /* LoginViewController.swift */,
+				42424B0026AA2223003E96FC /* User.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -184,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				420672B926975F65002306DB /* LaunchScreen.storyboard in Resources */,
+				42424AFD26A97CF6003E96FC /* Home.storyboard in Resources */,
 				420672B626975F65002306DB /* Assets.xcassets in Resources */,
 				4239429F26A70A0500B8141D /* Launch Screen.storyboard in Resources */,
 				427C5F70269C6DCB000BC489 /* Login.storyboard in Resources */,
@@ -239,11 +262,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42424B0826AC5A74003E96FC /* String+Verifications.swift in Sources */,
-				42424B0626AC580E003E96FC /* UIViewController+KeyboardHandling.swift in Sources */,
+
+				42424B0126AA2223003E96FC /* User.swift in Sources */,
 				427C5F72269C6DE9000BC489 /* LoginViewController.swift in Sources */,
+				42424B0B26AF57DA003E96FC /* String+Verifications.swift in Sources */,
 				420672AD26975F63002306DB /* AppDelegate.swift in Sources */,
-				42424B0426AC5792003E96FC /* UIColor+AppColors.swift in Sources */,
+				42424B0F26AF5840003E96FC /* UIViewController+KeyboardHandling.swift in Sources */,
+				42424AFF26A97D08003E96FC /* HomeViewController.swift in Sources */,
+				42424B0D26AF5804003E96FC /* UIColor+AppColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

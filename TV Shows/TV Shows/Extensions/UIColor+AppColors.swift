@@ -2,9 +2,8 @@
 //  UIColor+AppColors.swift
 //  TV Shows
 //
-//  Created by Infinum on 24.07.2021..
+//  Created by Infinum on 26.07.2021..
 //
-
 import UIKit
 
 extension UIColor {
