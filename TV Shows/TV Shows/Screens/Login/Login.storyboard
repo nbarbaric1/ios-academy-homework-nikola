@@ -38,7 +38,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qS-3u-tPa" userLabel="loginLabel">
-                                                <rect key="frame" x="40.000000000000007" y="208" width="87.666666666666686" height="41"/>
+                                                <rect key="frame" x="40" y="208" width="88" height="41"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -64,6 +64,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                                         <connections>
+                                                            <action selector="emailTextfieldEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingChanged" id="pf4-3E-iAf"/>
                                                             <action selector="emailTextfieldEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="zD1-lS-Zp8"/>
                                                         </connections>
                                                     </textField>
@@ -110,6 +111,7 @@
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                         <connections>
                                                             <action selector="passwordEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="MuT-zI-mP8"/>
+                                                            <action selector="passwordEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingChanged" id="pKk-dR-qZB"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>

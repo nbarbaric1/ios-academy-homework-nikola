@@ -36,6 +36,14 @@ class LoginViewController : UIViewController {
         configureUI()
     }
     
+//    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+//        if toInterfaceOrientation.isLandscape {
+//            scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.height + 300)
+//        } else {
+//            scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.height - 300)
+//        }
+//    }
+    
     deinit {
         scrollView.deleteObservers()
     }

@@ -21,7 +21,7 @@ extension UIScrollView {
                 guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
                         NSValue
                 else { return }
-                let height = value.cgRectValue.size.height
+                let height = value.cgRectValue.size.height / 3
                 self.contentSize = CGSize(width: self.frame.width, height: self.frame.height + height)
                 let bottomOffset = CGPoint(x: 0, y: self.contentSize.height - self.bounds.size.height)
                 self.setContentOffset(bottomOffset, animated: true)
@@ -37,7 +37,7 @@ extension UIScrollView {
             guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
             NSValue
             else { return }
-            let height = value.cgRectValue.size.height
+            let height = value.cgRectValue.size.height / 3
              self.contentSize = CGSize(width: self.frame.width, height: self.frame.height - height)
         }
     }

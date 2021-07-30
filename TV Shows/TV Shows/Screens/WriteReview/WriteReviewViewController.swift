@@ -22,12 +22,17 @@ class WriteReviewViewController: UIViewController {
     @IBOutlet private weak var commentTextView: UITextView!
     @IBOutlet private weak var submitButton: UIButton!
     @IBOutlet private weak var ratingView: RatingView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+    
+    deinit {
+        scrollView.deleteObservers()
     }
 }
 
@@ -83,6 +88,8 @@ extension WriteReviewViewController : UITextViewDelegate {
 
 private extension WriteReviewViewController {
     func configureUI() {
+        scrollView.handleKeyboard()
+        self.hideKeyboardWhenTappedAround()
         commentTextView.makeRounded(withCornerRadius: 20)
         submitButton.makeRounded(withCornerRadius: 20)
         
