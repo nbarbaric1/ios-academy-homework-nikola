@@ -26,6 +26,7 @@ class ShowDetailOthersTableViewCell: UITableViewCell {
         super.prepareForReuse()
         commentLabel.text = ""
         emailOfReviewerLabel.text = ""
+        photoOfReviewerImageView.image = UIImage(named: "ic-profile-placeholder")
     }
 
     func configure(with review: Review) {
@@ -36,7 +37,7 @@ class ShowDetailOthersTableViewCell: UITableViewCell {
         ratingView.setRoundedRating(Double(review.rating))
         
         if let image = review.user.imageUrl {
-            photoOfReviewerImageView.kf.setImage(with: URL(string: image))
+            photoOfReviewerImageView.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "ic-profile-placeholder"))
         }
     }
 }

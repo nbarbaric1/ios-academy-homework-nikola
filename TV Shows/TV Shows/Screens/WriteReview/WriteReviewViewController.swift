@@ -9,6 +9,10 @@ import UIKit
 import SVProgressHUD
 import Alamofire
 
+protocol WriteReviewViewControllerDelegate : AnyObject {
+    func newCommentAdded()
+}
+
 class WriteReviewViewController: UIViewController {
     
     // MARK: - Properties
@@ -17,6 +21,7 @@ class WriteReviewViewController: UIViewController {
     var userResponse: UserResponse?
     var authInfo: AuthInfo?
     var notificationTokens: [NSObjectProtocol] = []
+    weak var delegate: WriteReviewViewControllerDelegate?
     
     // MARK: - IBOutlets
     
@@ -30,6 +35,11 @@ class WriteReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     deinit {
@@ -63,6 +73,7 @@ extension WriteReviewViewController {
                 switch response.result{
                 case .success(let writeReviewResponse):
                     print("success WRVC")
+                    self.delegate?.newCommentAdded()
                     SVProgressHUD.showSuccess(withStatus: "Commented")
                 case .failure(let error):
                     print("error WRVC: \(error)")
@@ -100,7 +111,7 @@ private extension WriteReviewViewController {
             style: .plain,
             target: self,
             action: #selector(didSelectClose)
-          )
+        )
     }
     
     @objc func didSelectClose() {

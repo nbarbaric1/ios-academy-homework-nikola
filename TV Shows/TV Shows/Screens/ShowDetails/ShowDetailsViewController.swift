@@ -17,7 +17,8 @@ class ShowDetailsViewController: UIViewController {
     var userResponse: UserResponse?
     var authInfo: AuthInfo?
     var reviewsResponse: ReviewsResponse?
-    var reviews: [Review]?
+    var reviews: [Review] = []
+    var shouldReloadData = false
     
     // MARK: - IBOutlets
     
@@ -29,14 +30,14 @@ class ShowDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        getReviewsFromApi(for: show!.id)
+        guard let show = show else { return }
+        getReviewsFromApi(for: show.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        configureUI()
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-   
 }
 
 // MARK: - IBActions
@@ -54,16 +55,19 @@ extension ShowDetailsViewController : UITableViewDelegate {
         if indexPath.row == 0 { return 600 }
         return 140
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 // MARK: - TableView Datasource
 extension ShowDetailsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return show?.numberOfReviews ?? 0
+        return reviews.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let show = show else { return UITableViewCell() }
-        guard let reviews = reviews else { return UITableViewCell()}
         if indexPath.row == 0 {
             
             let firstCell = tableView.dequeueReusableCell(withIdentifier: String(describing: ShowDetailFirstTableViewCell.self), for: indexPath) as! ShowDetailFirstTableViewCell
@@ -71,17 +75,25 @@ extension ShowDetailsViewController : UITableViewDataSource {
             return firstCell
         } else {
             let otherCell = tableView.dequeueReusableCell(withIdentifier: String(describing: ShowDetailOthersTableViewCell.self), for: indexPath) as! ShowDetailOthersTableViewCell
-            otherCell.configure(with: reviews[indexPath.row] )
+            otherCell.configure(with: reviews[indexPath.row - 1] )
             return otherCell
         }
     }
-    
-    
 }
+
+// MARK: - WriteReviewViewControllerDelegate
+
+extension ShowDetailsViewController : WriteReviewViewControllerDelegate {
+    func newCommentAdded() {
+        guard let show = show else { return }
+        getReviewsFromApi(for: show.id)
+        showDetailsTableView.reloadData()
+    }
+}
+
 // MARK: - Private functions
 private extension ShowDetailsViewController {
     func configureUI() {
-        navigationController?.isNavigationBarHidden = false
         writeReviewButton.makeRounded(withCornerRadius: 20)
     }
     
@@ -133,6 +145,7 @@ private extension ShowDetailsViewController {
         writeReviewViewController.show = show
         writeReviewViewController.authInfo = authInfo
         writeReviewViewController.userResponse = userResponse
+        writeReviewViewController.delegate = self
         navigationController?.present(writeReviewViewController, animated: true, completion: nil)
     }
 }

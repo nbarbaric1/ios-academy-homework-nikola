@@ -21,7 +21,7 @@ class HomeViewController : UIViewController {
     
     var userResponse: UserResponse?
     var authInfo: AuthInfo?
-    var shows: [Show]?
+    var shows: [Show] = []
     
     // MARK: - Lifecycle methods
     
@@ -34,7 +34,7 @@ class HomeViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        configureUI()
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 }
 
@@ -42,21 +42,20 @@ class HomeViewController : UIViewController {
     // MARK: - TableView Delegate
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let shows = shows,
-              let userResponse = userResponse,
+        guard let userResponse = userResponse,
               let authInfo = authInfo
         else { return }
+        tableView.deselectRow(at: indexPath, animated: true)
         navigateToDetails(for: shows[indexPath.row], userResponse: userResponse, authInfo: authInfo)
     }
 }
     // MARK: - TableView DataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shows?.count ?? 0
+        return shows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let shows = shows else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TVShowTableViewCell.self), for: indexPath) as! TVShowTableViewCell
         cell.configure(with: shows[indexPath.row])
         return cell
@@ -67,7 +66,7 @@ extension HomeViewController: UITableViewDataSource {
 
 private extension HomeViewController {
     func configureUI() {
-        navigationController?.isNavigationBarHidden = true
+        
     }
     
     func navigateToDetails(for show: Show, userResponse: UserResponse, authInfo: AuthInfo) {

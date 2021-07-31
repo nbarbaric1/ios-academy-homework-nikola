@@ -12,15 +12,10 @@ class TVShowTableViewCell: UITableViewCell {
     
     @IBOutlet private var showNameLabel: UILabel!
     @IBOutlet private var showImageView: UIImageView!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         showNameLabel.text = ""
-        
     }
     
     func configure(with show: Show){

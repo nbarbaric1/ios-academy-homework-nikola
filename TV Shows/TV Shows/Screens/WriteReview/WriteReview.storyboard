@@ -109,6 +109,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="wQJ-ib-Lox" secondAttribute="bottom" id="mF3-aX-9gl"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="YrJ-0h-LhK"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="commentTextView" destination="npu-8Z-qav" id="U9m-Hj-n5t"/>
@@ -118,6 +119,24 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="931.88405797101461" y="-9.375"/>
+        </scene>
+        <!--TEST-->
+        <scene sceneID="trV-Dp-c2P">
+            <objects>
+                <navigationController title="TEST" automaticallyAdjustsScrollViewInsets="NO" id="LzP-Yb-PPw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eGR-gL-R0W">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="abg-qt-mDI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfD-aq-hRb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="21.739130434782609" y="-9.375"/>
         </scene>
