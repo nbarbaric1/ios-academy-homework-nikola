@@ -16,6 +16,7 @@ class WriteReviewViewController: UIViewController {
     var show: Show?
     var userResponse: UserResponse?
     var authInfo: AuthInfo?
+    var notificationTokens: [NSObjectProtocol] = []
     
     // MARK: - IBOutlets
     
@@ -32,7 +33,7 @@ class WriteReviewViewController: UIViewController {
     }
     
     deinit {
-        scrollView.deleteObservers()
+        scrollView.deleteObservers(for: notificationTokens)
     }
 }
 
@@ -88,7 +89,7 @@ extension WriteReviewViewController : UITextViewDelegate {
 
 private extension WriteReviewViewController {
     func configureUI() {
-        scrollView.handleKeyboard()
+        notificationTokens = scrollView.handleKeyboard()
         self.hideKeyboardWhenTappedAround()
         commentTextView.makeRounded(withCornerRadius: 20)
         submitButton.makeRounded(withCornerRadius: 20)

@@ -27,6 +27,7 @@ class LoginViewController : UIViewController {
     
     var userResponse: UserResponse?
     var authInfo: AuthInfo?
+    var notificationTokens: [NSObjectProtocol] = []
     
     // MARK: - Lifecycle methods
     
@@ -45,7 +46,7 @@ class LoginViewController : UIViewController {
 //    }
     
     deinit {
-        scrollView.deleteObservers()
+        scrollView.deleteObservers(for: notificationTokens)
     }
 }
 
@@ -63,7 +64,7 @@ private extension LoginViewController {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
         loginButton.layer.cornerRadius = 22
         loginButton.clipsToBounds = true
-        scrollView.handleKeyboard()
+        notificationTokens = scrollView.handleKeyboard()
     }
 }
 
