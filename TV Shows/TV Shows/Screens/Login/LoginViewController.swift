@@ -34,6 +34,10 @@ class LoginViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        if let ima = AuthStorage.shared.authInfo {
+            print("sad ima")
+            navigateToHomeScreen()
+        }
         configureUI()
     }
     
@@ -62,7 +66,7 @@ private extension LoginViewController {
 
 // MARK: IBActions
 
-private extension LoginViewController{
+private extension LoginViewController {
     @IBAction private func rememberCheckButtonActionHandler() {
         rememberCheckButton.isSelected.toggle()
     }
@@ -85,79 +89,58 @@ private extension LoginViewController{
         else {return}
         
         SVProgressHUD.show()
-        let params : [String: String] = [
-            "email" : email,
-            "password" : password,
-            "password_confirmation" : password
-        ]
         
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/users",
-                method: .post,
-                parameters: params,
-                encoder: JSONParameterEncoder.default)
-            .validate()
-            .responseDecodable(of: UserResponse.self) { [weak self] response in
-                guard let self = self else { return }
-                
-                switch response.result{
-                case .success(let userResponse):
-                    let headers = response.response?.headers.dictionary ?? [:]
-                    self.userResponse = userResponse
-                    self.handleAuthInfoWhenSuccesfulLoginOrRegister(headers: headers)
-                    self.navigateToHomeScreen()
-                case .failure(let error):
-                    print("error: \(error)")
-                    SVProgressHUD.dismiss()
-                    self.alertError()
-                }
-            }
+        let router = Router.User.register(email: email, password: password)
+        performAuth(with: router)
     }
     
     @IBAction private func loginButtonActionHandler(){
-        
         guard let email = emailTextfield.text,
               let password = passwordTextfield.text
         else {return}
         
-        SVProgressHUD.show()
-        let params : [String: String] = [
-            "email" : email,
-            "password" : password,
-        ]
-        
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/users/sign_in",
-                method: .post,
-                parameters: params,
-                encoder: JSONParameterEncoder.default
-            )
-            .validate()
-            .responseDecodable(of: UserResponse.self) { [weak self] response in
-                guard let self = self else { return }
-                
-                switch response.result {
-                
-                case .success(let userResponse):
-                    print("succes: \(userResponse.user.email)")
-                    let headers = response.response?.headers.dictionary ?? [:]
-                    self.userResponse = userResponse
-                    self.handleAuthInfoWhenSuccesfulLoginOrRegister(headers: headers)
-                    self.navigateToHomeScreen()
-                case .failure(let error):
-                    print("error: \(error)")
-                    SVProgressHUD.dismiss()
-                    self.alertError()
-                }
-            }
+        let router = Router.User.login(email: email, password: password)
+        performAuth(with: router)
     }
 }
 
 // MARK: - Private functions
 
 private extension LoginViewController {
+    func performAuth(with router: Router){
+        let rememberMe = rememberCheckButton.isSelected
+        
+        SVProgressHUD.show()
+        
+        APIManager.shared.call(of: UserResponse.self, router: router) { dataResponse in
+            let authInfo = dataResponse
+                .response
+                .map(\.headers)
+                .map(\.dictionary)
+                .flatMap { try? AuthInfo(headers: $0) }
+            self.authInfo = authInfo
+            if rememberMe {
+                AuthStorage.shared.storeAuthInfo(authInfo)
+            } else {
+                AuthStorage.shared.authInfo = authInfo
+            }
+        } completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result{
+            
+            case .success(let userResponse):
+                print("succes: \(userResponse.user.email)")
+                self.userResponse = userResponse
+                SVProgressHUD.showSuccess(withStatus: "Yes")
+                self.navigateToHomeScreen()
+            case .failure(let error):
+                print("error: \(error)")
+                SVProgressHUD.showError(withStatus: "Error")
+            }
+        }
+    }
+    
+    
     func navigateToHomeScreen() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
@@ -202,3 +185,4 @@ private extension LoginViewController {
         self.present(alertController, animated: true)
     }
 }
+
