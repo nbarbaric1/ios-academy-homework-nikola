@@ -18,7 +18,6 @@ class ShowDetailsViewController: UIViewController {
     var authInfo: AuthInfo?
     var reviewsResponse: ReviewsResponse?
     var reviews: [Review] = []
-    var shouldReloadData = false
     
     // MARK: - IBOutlets
     

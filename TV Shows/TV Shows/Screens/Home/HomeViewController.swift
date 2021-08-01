@@ -20,7 +20,6 @@ class HomeViewController : UIViewController {
     // MARK: - Properties
     
     var userResponse: UserResponse?
-    var authInfo: AuthInfo?
     var shows: [Show] = []
     
     // MARK: - Lifecycle methods
@@ -42,11 +41,8 @@ class HomeViewController : UIViewController {
     // MARK: - TableView Delegate
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let userResponse = userResponse,
-              let authInfo = authInfo
-        else { return }
         tableView.deselectRow(at: indexPath, animated: true)
-        navigateToDetails(for: shows[indexPath.row], userResponse: userResponse, authInfo: authInfo)
+        navigateToDetails(for: shows[indexPath.row])
     }
 }
     // MARK: - TableView DataSource
@@ -69,15 +65,13 @@ private extension HomeViewController {
         
     }
     
-    func navigateToDetails(for show: Show, userResponse: UserResponse, authInfo: AuthInfo) {
+    func navigateToDetails(for show: Show) {
         let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
         let showDetailsViewController = storyboard
             .instantiateViewController(
                 withIdentifier: String(describing: ShowDetailsViewController.self)
             ) as! ShowDetailsViewController
-        showDetailsViewController.show = show
-        showDetailsViewController.authInfo = authInfo
-        showDetailsViewController.userResponse = userResponse
+//        showDetailsViewController.show = show
         navigationController?.pushViewController(showDetailsViewController, animated: true)
     }
     
@@ -90,34 +84,21 @@ private extension HomeViewController {
     
     func getShowsFromApi() {
         SVProgressHUD.show()
-        guard let userResponse = userResponse,
-              let authInfo = authInfo
-        else { alertError(); return }
         
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/shows",
-                method: .get,
-                parameters: ["page": "1", "items": "100"], // pagination arguments
-                headers: HTTPHeaders(authInfo.headers)
-            )
-            .validate()
-            .responseDecodable(of: ShowsResponse.self) { [weak self] response in
-                guard let self = self else { return }
-                
-                switch response.result {
-                
-                case .success(let showsResponse):
-                    print("SUCCES in HomeVC: \(showsResponse)")
-                    SVProgressHUD.showSuccess(withStatus: "Success")
-                    self.shows = showsResponse.shows
-                    self.showsTableView.reloadData()
-                case .failure(let error):
-                    print("error in HomeVC: \(error)")
-                    SVProgressHUD.dismiss()
-                    self.alertError()
-                }
+        APIManager.shared.call(of: ShowsResponse.self,
+                               router: Router.Show.shows()){ [weak self] result in
+            guard let self = self else { return }
+            print("result in hvc:", result)
+            switch result {
+            case .success(let showsResponse):
+                print((showsResponse))
+                SVProgressHUD.showSuccess(withStatus: "Success")
+                self.shows = showsResponse.shows
+                self.showsTableView.reloadData()
+            case .failure(let error):
+                SVProgressHUD.showError(withStatus: "Error")
             }
+        }
     }
     
     func setupTableView() {

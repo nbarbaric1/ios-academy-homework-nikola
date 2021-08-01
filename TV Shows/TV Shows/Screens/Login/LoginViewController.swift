@@ -8,7 +8,6 @@
 // MARK: Imports
 
 import UIKit
-import Alamofire
 import SVProgressHUD
 
 class LoginViewController : UIViewController {
@@ -34,10 +33,10 @@ class LoginViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        if let ima = AuthStorage.shared.authInfo {
-            print("sad ima")
-            navigateToHomeScreen()
-        }
+//        if let ima = AuthStorage.shared.authInfo {
+//            print("sad ima")
+//            navigateToHomeScreen()
+//        }
         configureUI()
     }
     
@@ -118,7 +117,7 @@ private extension LoginViewController {
                 .map(\.headers)
                 .map(\.dictionary)
                 .flatMap { try? AuthInfo(headers: $0) }
-            self.authInfo = authInfo
+           // self.authInfo = authInfo
             if rememberMe {
                 AuthStorage.shared.storeAuthInfo(authInfo)
             } else {
@@ -130,7 +129,7 @@ private extension LoginViewController {
             
             case .success(let userResponse):
                 print("succes: \(userResponse.user.email)")
-                self.userResponse = userResponse
+               //self.userResponse = userResponse
                 SVProgressHUD.showSuccess(withStatus: "Yes")
                 self.navigateToHomeScreen()
             case .failure(let error):
@@ -140,22 +139,12 @@ private extension LoginViewController {
         }
     }
     
-    
     func navigateToHomeScreen() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        homeViewController.userResponse = userResponse
-        homeViewController.authInfo = authInfo
+//        homeViewController.userResponse = userResponse
+//        homeViewController.authInfo = authInfo
         navigationController?.pushViewController(homeViewController, animated: true)
-    }
-    
-    func handleAuthInfoWhenSuccesfulLoginOrRegister(headers: [String: String]) {
-        guard let authInfo = try? AuthInfo(headers: headers) else {
-            SVProgressHUD.showError(withStatus: "Missing headers")
-            return
-        }
-        self.authInfo = authInfo
-        SVProgressHUD.showSuccess(withStatus: "Success")
     }
     
     func checkInputs() {

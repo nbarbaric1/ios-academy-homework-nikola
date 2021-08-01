@@ -25,7 +25,8 @@ public extension Routable {
         
         switch method {
         case .post, .get, .patch:
-            request = try JSONEncoding.default.encode(request, with: params)
+            // changed JSONEncoding to URLEncoding
+            request = try URLEncoding.default.encode(request, with: params)
         default:
             request = try URLEncoding.default.encode(request, with: params)
         }

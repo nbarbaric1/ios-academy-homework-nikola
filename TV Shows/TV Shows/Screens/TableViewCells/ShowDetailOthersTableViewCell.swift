@@ -38,6 +38,8 @@ class ShowDetailOthersTableViewCell: UITableViewCell {
         
         if let image = review.user.imageUrl {
             photoOfReviewerImageView.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "ic-profile-placeholder"))
+        } else {
+            photoOfReviewerImageView.image = UIImage(named: "ic-profile-placeholder")
         }
     }
 }
