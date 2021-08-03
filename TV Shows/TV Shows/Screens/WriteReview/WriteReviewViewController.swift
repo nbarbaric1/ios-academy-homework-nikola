@@ -50,9 +50,7 @@ class WriteReviewViewController: UIViewController {
 // MARK: IBActions
 extension WriteReviewViewController {
     @IBAction func submitButtonActionHandler() {
-        guard let show = show,
-              let authInfo = authInfo
-        else { return }
+        guard let show = show else { return }
         SVProgressHUD.show()
         let params : [String: String] = [
             "rating" : String(ratingView.rating),
@@ -60,26 +58,21 @@ extension WriteReviewViewController {
             "show_id" : show.id
         ]
         
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/reviews",
-                method: .post,
-                parameters: params,
-                headers: HTTPHeaders(authInfo.headers))
-            .validate()
-            .responseDecodable(of: WriteReviewResponse.self) { [weak self] response in
-                guard let self = self else { return }
-                
-                switch response.result{
-                case .success(let writeReviewResponse):
-                    print("success WRVC")
-                    self.delegate?.newCommentAdded()
-                    SVProgressHUD.showSuccess(withStatus: "Commented")
-                case .failure(let error):
-                    print("error WRVC: \(error)")
-                    SVProgressHUD.dismiss()
-                }
+        APIManager.shared.call(of: WriteReviewResponse.self,
+                               router: Router.Review.addReview(rating: String(ratingView.rating),
+                                                               comment: commentTextView.text,
+                                                               id: show.id))
+        { [weak self] result in
+            guard let self = self else {return}
+            
+            switch result {
+            case .success(_):
+                self.delegate?.newCommentAdded()
+                SVProgressHUD.showSuccess(withStatus: "Commented")
+            case .failure(_):
+                SVProgressHUD.showError(withStatus: "Error")
             }
+        }
     }
 }
 // TODO: Check this

@@ -19,7 +19,6 @@ class HomeViewController : UIViewController {
     
     // MARK: - Properties
     
-    var userResponse: UserResponse?
     var shows: [Show] = []
     
     // MARK: - Lifecycle methods
@@ -71,7 +70,7 @@ private extension HomeViewController {
             .instantiateViewController(
                 withIdentifier: String(describing: ShowDetailsViewController.self)
             ) as! ShowDetailsViewController
-//        showDetailsViewController.show = show
+        showDetailsViewController.show = show
         navigationController?.pushViewController(showDetailsViewController, animated: true)
     }
     

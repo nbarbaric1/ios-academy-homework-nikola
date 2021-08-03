@@ -43,6 +43,7 @@
 		4285B8AC26B6102200A72C6D /* AuthStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4285B8AB26B6102200A72C6D /* AuthStorage.swift */; };
 		4285B8AE26B614CE00A72C6D /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4285B8AD26B614CE00A72C6D /* UserDefaultsManager.swift */; };
 		4285B8B026B63EF500A72C6D /* ShowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4285B8AF26B63EF500A72C6D /* ShowRouter.swift */; };
+		42A9829326BA01D90015FE8D /* ReviewsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A9829226BA01D90015FE8D /* ReviewsRouter.swift */; };
 		42EC3C1626B0FD440053BE57 /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */; };
 		B116EEA007E847624584A62B /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33BFA9C0E4879027F658BAD9 /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		4285B8AB26B6102200A72C6D /* AuthStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStorage.swift; sourceTree = "<group>"; };
 		4285B8AD26B614CE00A72C6D /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		4285B8AF26B63EF500A72C6D /* ShowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRouter.swift; sourceTree = "<group>"; };
+		42A9829226BA01D90015FE8D /* ReviewsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsRouter.swift; sourceTree = "<group>"; };
 		42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
 		DBAF33CE8F73495F6D1C1E84 /* Pods-TV Shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.debug.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -237,12 +239,21 @@
 		4285B8A226B6072700A72C6D /* Routers */ = {
 			isa = PBXGroup;
 			children = (
+				42A9829426BA07C50015FE8D /* Base */,
 				4285B89E26B6029900A72C6D /* UserRouter.swift */,
-				4285B8A326B6073900A72C6D /* Router.swift */,
-				4285B8A526B6090600A72C6D /* Routable.swift */,
 				4285B8AF26B63EF500A72C6D /* ShowRouter.swift */,
+				42A9829226BA01D90015FE8D /* ReviewsRouter.swift */,
 			);
 			path = Routers;
+			sourceTree = "<group>";
+		};
+		42A9829426BA07C50015FE8D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				4285B8A326B6073900A72C6D /* Router.swift */,
+				4285B8A526B6090600A72C6D /* Routable.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		42EC3C1426B0FCFC0053BE57 /* TableViewCells */ = {
@@ -392,6 +403,7 @@
 			files = (
 				4259E94926B1E5FD007EEC06 /* RatingView.swift in Sources */,
 				4285B89F26B6029900A72C6D /* UserRouter.swift in Sources */,
+				42A9829326BA01D90015FE8D /* ReviewsRouter.swift in Sources */,
 				42262D8E26B018B000E938B5 /* ShowsResponse.swift in Sources */,
 				42424B0126AA2223003E96FC /* User.swift in Sources */,
 				4259E95026B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift in Sources */,

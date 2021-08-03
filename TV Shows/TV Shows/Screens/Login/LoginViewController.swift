@@ -117,7 +117,7 @@ private extension LoginViewController {
                 .map(\.headers)
                 .map(\.dictionary)
                 .flatMap { try? AuthInfo(headers: $0) }
-           // self.authInfo = authInfo
+            
             if rememberMe {
                 AuthStorage.shared.storeAuthInfo(authInfo)
             } else {
@@ -128,8 +128,6 @@ private extension LoginViewController {
             switch result{
             
             case .success(let userResponse):
-                print("succes: \(userResponse.user.email)")
-               //self.userResponse = userResponse
                 SVProgressHUD.showSuccess(withStatus: "Yes")
                 self.navigateToHomeScreen()
             case .failure(let error):
@@ -142,8 +140,6 @@ private extension LoginViewController {
     func navigateToHomeScreen() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-//        homeViewController.userResponse = userResponse
-//        homeViewController.authInfo = authInfo
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     

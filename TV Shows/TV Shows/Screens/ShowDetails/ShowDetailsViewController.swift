@@ -14,8 +14,6 @@ class ShowDetailsViewController: UIViewController {
     // MARK: - Properties
     
     var show: Show?
-    var userResponse: UserResponse?
-    var authInfo: AuthInfo?
     var reviewsResponse: ReviewsResponse?
     var reviews: [Review] = []
     
@@ -23,7 +21,7 @@ class ShowDetailsViewController: UIViewController {
     
     @IBOutlet private weak var showDetailsTableView: UITableView!
     @IBOutlet private weak var writeReviewButton: UIButton!
-
+    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
@@ -98,41 +96,19 @@ private extension ShowDetailsViewController {
     
     func getReviewsFromApi(for id: String) {
         SVProgressHUD.show()
-        guard let userResponse = userResponse,
-              let authInfo = authInfo
-        else { //alertError();
-            return }
         
-        print("AUTHINFO: \(authInfo)")
-        
-        var reviewsUrl: String = "https://tv-shows.infinum.academy/shows/"
-        reviewsUrl.append(id)
-        reviewsUrl.append("/reviews")
-            
-        AF
-            .request(
-                reviewsUrl,
-                method: .get,
-                parameters: ["page": "1", "items": "100"], // pagination arguments
-                headers: HTTPHeaders(authInfo.headers)
-            )
-            .validate()
-            .responseDecodable(of: ReviewsResponse.self) { [weak self] response in
-                guard let self = self else { return }
-                
-                switch response.result {
-                
-                case .success(let reviewsResponse):
-                    print("SUCCES in SDVC: \(reviewsResponse)")
-                    SVProgressHUD.showSuccess(withStatus: "Success")
-                    self.reviews = reviewsResponse.reviews
-                    self.showDetailsTableView.reloadData()
-                case .failure(let error):
-                    print("error in SDVC: \(error)")
-                    SVProgressHUD.dismiss()
-                    //self.alertError()
-                }
+        APIManager.shared.call(of: ReviewsResponse.self,
+                               router: Router.Review.getReviews(id: id)) { [weak self] result in
+            guard let self = self else { return }
+            switch result{
+            case .success(let reviewsResponse):
+                SVProgressHUD.showSuccess(withStatus: "Success")
+                self.reviews = reviewsResponse.reviews
+                self.showDetailsTableView.reloadData()
+            case .failure(let error):
+                SVProgressHUD.dismiss()
             }
+        }
     }
     
     func navigateToWriteReview() {
@@ -142,8 +118,6 @@ private extension ShowDetailsViewController {
                 withIdentifier: String(describing: WriteReviewViewController.self)
             ) as! WriteReviewViewController
         writeReviewViewController.show = show
-        writeReviewViewController.authInfo = authInfo
-        writeReviewViewController.userResponse = userResponse
         writeReviewViewController.delegate = self
         navigationController?.present(writeReviewViewController, animated: true, completion: nil)
     }
