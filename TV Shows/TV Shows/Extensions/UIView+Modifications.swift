@@ -12,4 +12,12 @@ extension UIView {
         self.layer.cornerRadius = CGFloat(radius)
         self.clipsToBounds = true
     }
+    
+    func shake() {
+        self.transform = CGAffineTransform(translationX: -2, y: 0)
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.autoreverse]) {
+            UIView.setAnimationRepeatCount(3)
+            self.transform = .identity
+        }
+    }
 }

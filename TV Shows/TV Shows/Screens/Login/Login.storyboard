@@ -64,8 +64,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                                         <connections>
-                                                            <action selector="emailTextfieldEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingChanged" id="pf4-3E-iAf"/>
-                                                            <action selector="emailTextfieldEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="zD1-lS-Zp8"/>
+                                                            <action selector="emailTextfieldEditingDidChangeActionHandler" destination="Y6W-OH-hqX" eventType="editingChanged" id="BlQ-xs-vcV"/>
+                                                            <action selector="emailTextfieldEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="MpN-PQ-0Ir"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>
@@ -110,8 +110,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                         <connections>
-                                                            <action selector="passwordEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="MuT-zI-mP8"/>
-                                                            <action selector="passwordEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingChanged" id="pKk-dR-qZB"/>
+                                                            <action selector="passwordEditingDidChangeActionHandler" destination="Y6W-OH-hqX" eventType="editingChanged" id="vsU-4D-h0V"/>
+                                                            <action selector="passwordEditingDidEndActionHandler" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="Acw-f7-Vg0"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>
