@@ -28,6 +28,7 @@ class HomeViewController : UIViewController {
         configureUI()
         getShowsFromApi()
         setupTableView()
+        registerForNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,5 +128,17 @@ private extension HomeViewController {
                 withIdentifier: String(describing: MyProfileViewController.self)
             ) as! MyProfileViewController
         navigationController?.present(myProfileViewController, animated: true, completion: nil)
+    }
+    
+    func registerForNotifications() {
+        NotificationCenter.default.addObserver(forName: Notification.Name(Constants.Notifications.logOut), object: nil, queue: nil) { _ in
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let loginViewController = storyboard
+                .instantiateViewController(
+                    withIdentifier: String(describing: LoginViewController.self)
+                ) as! LoginViewController
+            self.navigationController?.setViewControllers([loginViewController], animated:
+           true)
+        }
     }
 }

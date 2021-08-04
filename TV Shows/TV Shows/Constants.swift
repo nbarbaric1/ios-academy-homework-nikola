@@ -11,4 +11,12 @@ enum Constants {
     enum API {
         static let baseUrl: String = "https://tv-shows.infinum.academy"
     }
+    
+    enum Storage {
+        static let authInfoUserDefaultsKey = "authInfo"
+    }
+    
+    enum Notifications {
+        static let logOut = "logOut"
+    }
 }
