@@ -20,6 +20,7 @@ class ShowDetailOthersTableViewCell: UITableViewCell {
         super.awakeFromNib()
         photoOfReviewerImageView.layer.cornerRadius = 20
         photoOfReviewerImageView.clipsToBounds = true
+        photoOfReviewerImageView.image = UIImage(named: "ic-profile-placeholder")
     }
     
     override func prepareForReuse() {

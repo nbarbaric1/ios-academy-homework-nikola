@@ -33,15 +33,17 @@ class LoginViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-//        if let ima = AuthStorage.shared.authInfo {
-//            print("sad ima")
-//            navigateToHomeScreen()
-//        }
         configureUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     deinit {
-        scrollView.deleteObservers(for: notificationTokens)
+        notificationTokens.forEach { notificationToken in
+            scrollView.deleteObservers(for: notificationToken)
+        }
     }
 }
 

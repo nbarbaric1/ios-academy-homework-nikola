@@ -7,7 +7,6 @@
 
 import UIKit
 import SVProgressHUD
-import Alamofire
 
 protocol WriteReviewViewControllerDelegate : AnyObject {
     func newCommentAdded()
@@ -43,8 +42,9 @@ class WriteReviewViewController: UIViewController {
     }
     
     deinit {
-        scrollView.deleteObservers(for: notificationTokens)
-    }
+        notificationTokens.forEach { notificationToken in
+            scrollView.deleteObservers(for: notificationToken)
+        }    }
 }
 
 // MARK: IBActions
@@ -52,27 +52,22 @@ extension WriteReviewViewController {
     @IBAction func submitButtonActionHandler() {
         guard let show = show else { return }
         SVProgressHUD.show()
-        let params : [String: String] = [
-            "rating" : String(ratingView.rating),
-            "comment" : commentTextView.text,
-            "show_id" : show.id
-        ]
-        
+     
         APIManager.shared.call(of: WriteReviewResponse.self,
                                router: Router.Review.addReview(rating: String(ratingView.rating),
                                                                comment: commentTextView.text,
                                                                id: show.id))
-        { [weak self] result in
-            guard let self = self else {return}
-            
-            switch result {
-            case .success(_):
-                self.delegate?.newCommentAdded()
-                SVProgressHUD.showSuccess(withStatus: "Commented")
-            case .failure(_):
-                SVProgressHUD.showError(withStatus: "Error")
+            { [weak self] result in
+                guard let self = self else {return}
+                
+                switch result {
+                case .success(_):
+                    self.delegate?.newCommentAdded()
+                    SVProgressHUD.showSuccess(withStatus: "Commented")
+                case .failure(_):
+                    SVProgressHUD.showError(withStatus: "Error")
+                }
             }
-        }
     }
 }
 // TODO: Check this

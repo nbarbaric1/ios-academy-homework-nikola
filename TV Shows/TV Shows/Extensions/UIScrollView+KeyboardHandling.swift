@@ -40,10 +40,11 @@ extension UIScrollView {
         return notificationTokens
     }
     
-    func deleteObservers(for notificationTokens:[NSObjectProtocol]) {
-        notificationTokens.forEach { notificationToken in
-            NotificationCenter.default.removeObserver(notificationToken)
-        }
+    func deleteObservers(for notificationToken: NSObjectProtocol) {
+        NotificationCenter.default.removeObserver(notificationToken)
     }
 }
+
+
+
 

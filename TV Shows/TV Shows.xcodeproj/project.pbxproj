@@ -44,6 +44,7 @@
 		4285B8AE26B614CE00A72C6D /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4285B8AD26B614CE00A72C6D /* UserDefaultsManager.swift */; };
 		4285B8B026B63EF500A72C6D /* ShowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4285B8AF26B63EF500A72C6D /* ShowRouter.swift */; };
 		42A9829326BA01D90015FE8D /* ReviewsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A9829226BA01D90015FE8D /* ReviewsRouter.swift */; };
+		42A9829826BA2C0F0015FE8D /* ShowDetailNoReviewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A9829726BA2C0F0015FE8D /* ShowDetailNoReviewsTableViewCell.swift */; };
 		42EC3C1626B0FD440053BE57 /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */; };
 		B116EEA007E847624584A62B /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33BFA9C0E4879027F658BAD9 /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +91,7 @@
 		4285B8AD26B614CE00A72C6D /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		4285B8AF26B63EF500A72C6D /* ShowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRouter.swift; sourceTree = "<group>"; };
 		42A9829226BA01D90015FE8D /* ReviewsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsRouter.swift; sourceTree = "<group>"; };
+		42A9829726BA2C0F0015FE8D /* ShowDetailNoReviewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailNoReviewsTableViewCell.swift; sourceTree = "<group>"; };
 		42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
 		DBAF33CE8F73495F6D1C1E84 /* Pods-TV Shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.debug.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -262,6 +264,7 @@
 				42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */,
 				4259E94F26B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift */,
 				4259E95326B20690007EEC06 /* ShowDetailOthersTableViewCell.swift */,
+				42A9829726BA2C0F0015FE8D /* ShowDetailNoReviewsTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				4259E95626B21456007EEC06 /* ReviewsResponse.swift in Sources */,
 				4285B8AE26B614CE00A72C6D /* UserDefaultsManager.swift in Sources */,
 				4259E96226B247BF007EEC06 /* UIButton+Modifications.swift in Sources */,
+				42A9829826BA2C0F0015FE8D /* ShowDetailNoReviewsTableViewCell.swift in Sources */,
 				4285B8B026B63EF500A72C6D /* ShowRouter.swift in Sources */,
 				4259E96026B2431E007EEC06 /* UITextView+Modifications.swift in Sources */,
 				42424B0D26AF5804003E96FC /* UIColor+AppColors.swift in Sources */,
