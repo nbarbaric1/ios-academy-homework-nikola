@@ -8,7 +8,6 @@
 // MARK: Imports
 
 import UIKit
-import Alamofire
 import SVProgressHUD
 
 class LoginViewController : UIViewController {
@@ -21,10 +20,13 @@ class LoginViewController : UIViewController {
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var seePasswordButton: UIButton!
     @IBOutlet private weak var registerButton: UIButton!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     // MARK: - Properties
     
     var userResponse: UserResponse?
+    var authInfo: AuthInfo?
+    var notificationTokens: [NSObjectProtocol] = []
     
     // MARK: - Lifecycle methods
     
@@ -32,6 +34,16 @@ class LoginViewController : UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    deinit {
+        notificationTokens.forEach { notificationToken in
+            scrollView.deleteObservers(for: notificationToken)
+        }
     }
 }
 
@@ -49,12 +61,13 @@ private extension LoginViewController {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
         loginButton.layer.cornerRadius = 22
         loginButton.clipsToBounds = true
+        notificationTokens = scrollView.handleKeyboard()
     }
 }
 
 // MARK: IBActions
 
-private extension LoginViewController{
+private extension LoginViewController {
     @IBAction private func rememberCheckButtonActionHandler() {
         rememberCheckButton.isSelected.toggle()
     }
@@ -77,91 +90,62 @@ private extension LoginViewController{
         else {return}
         
         SVProgressHUD.show()
-        let params : [String: String] = [
-            "email" : email,
-            "password" : password,
-            "password_confirmation" : password
-        ]
         
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/users",
-                method: .post,
-                parameters: params,
-                encoder: JSONParameterEncoder.default)
-            .validate()
-            .responseDecodable(of: UserResponse.self) { [weak self] response in
-                guard let self = self else { return }
-                
-                switch response.result{
-                case .success(let user):
-                    self.userResponse = user
-                    print(self.userResponse)
-                    SVProgressHUD.showSuccess(withStatus: "Success")
-                    self.navigateToHomeScreen()
-                case .failure(let error):
-                    print("error: \(error)")
-                    SVProgressHUD.showError(withStatus: "Failure")
-                }
-            }
+        let router = Router.User.register(email: email, password: password)
+        performAuth(with: router)
     }
     
     @IBAction private func loginButtonActionHandler(){
-        
         guard let email = emailTextfield.text,
               let password = passwordTextfield.text
         else {return}
         
-        SVProgressHUD.show()
-        let params : [String: String] = [
-            "email" : email,
-            "password" : password,
-        ]
-        
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/users/sign_in",
-                method: .post,
-                parameters: params,
-                encoder: JSONParameterEncoder.default
-            )
-            .validate()
-            .responseDecodable(of: UserResponse.self) { [weak self] response in
-                guard let self = self else { return }
-                
-                switch response.result {
-                
-                case .success(let user):
-                    print("succes: \(user.user.email)")
-                    let headers = response.response?.headers.dictionary ?? [:]
-                    self.handleSuccesfulLogin(for: user.user, headers: headers)
-                    self.navigateToHomeScreen()
-                case .failure(let error):
-                    print("error: \(error)")
-                    SVProgressHUD.showError(withStatus: "Failure")
-                }
-            }
+        let router = Router.User.login(email: email, password: password)
+        performAuth(with: router)
     }
 }
 
 // MARK: - Private functions
 
 private extension LoginViewController {
-    private func navigateToHomeScreen(){
+    func performAuth(with router: Router){
+        let rememberMe = rememberCheckButton.isSelected
+        
+        SVProgressHUD.show()
+        
+        APIManager.shared.call(of: UserResponse.self, router: router) { dataResponse in
+            let authInfo = dataResponse
+                .response
+                .map(\.headers)
+                .map(\.dictionary)
+                .flatMap { try? AuthInfo(headers: $0) }
+            
+            if rememberMe {
+                AuthStorage.shared.storeAuthInfo(authInfo)
+            } else {
+                AuthStorage.shared.authInfo = authInfo
+            }
+        } completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result{
+            
+            case .success(let userResponse):
+                SVProgressHUD.showSuccess(withStatus: "Yes")
+                self.navigateToHomeScreen()
+            case .failure(let error):
+                print("error: \(error)")
+                SVProgressHUD.showError(withStatus: "Error")
+            }
+        }
+    }
+    
+    func navigateToHomeScreen() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     
-    private func handleSuccesfulLogin(for user: User, headers: [String: String]) {
-        guard let authInfo = try? AuthInfo(headers: headers) else {
-            SVProgressHUD.showError(withStatus: "Missing headers")
-            return
-        }
-        SVProgressHUD.showSuccess(withStatus: "Success")
-    }
-    
-    private func checkInputs() {
+    func checkInputs() {
         guard let email = emailTextfield.text,
               let password = passwordTextfield.text
         else { return }
@@ -179,6 +163,13 @@ private extension LoginViewController {
             registerButton.isEnabled = false
             registerButton.setTitleColor(.white.withAlphaComponent(0.3), for: .normal)
         }
-        
+    }
+    
+    func alertError() {
+        let alertController = UIAlertController(title: "Error", message: "An error occurred. Please check your inputs and try again.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
     }
 }
+
