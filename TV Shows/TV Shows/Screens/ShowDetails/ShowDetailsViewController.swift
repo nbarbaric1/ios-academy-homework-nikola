@@ -36,6 +36,10 @@ class ShowDetailsViewController: UIViewController {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("Evo mene")
+    }
 }
 
 // MARK: - IBActions

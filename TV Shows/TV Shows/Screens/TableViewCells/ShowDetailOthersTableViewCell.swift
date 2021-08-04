@@ -18,8 +18,7 @@ class ShowDetailOthersTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        photoOfReviewerImageView.layer.cornerRadius = 20
-        photoOfReviewerImageView.clipsToBounds = true
+        photoOfReviewerImageView.makeRounded(withCornerRadius: 20)
         photoOfReviewerImageView.image = UIImage(named: "ic-profile-placeholder")
     }
     

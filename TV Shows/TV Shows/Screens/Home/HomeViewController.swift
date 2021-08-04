@@ -32,7 +32,16 @@ class HomeViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        let image = UIImage(named: "ic-profile")
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: image,
+            style: .plain,
+            target: self,
+            action: #selector(didSelectClose)
+        )
+        navigationItem.hidesBackButton = true  
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }
 
@@ -105,5 +114,18 @@ private extension HomeViewController {
         showsTableView.rowHeight = UITableView.automaticDimension
         showsTableView.delegate = self
         showsTableView.dataSource = self
+    }
+    
+    @objc func didSelectClose() {
+        navigateToMyProfile()
+    }
+    
+    func navigateToMyProfile() {
+        let storyboard = UIStoryboard(name: "MyProfile", bundle: nil)
+        let myProfileViewController = storyboard
+            .instantiateViewController(
+                withIdentifier: String(describing: MyProfileViewController.self)
+            ) as! MyProfileViewController
+        navigationController?.present(myProfileViewController, animated: true, completion: nil)
     }
 }
