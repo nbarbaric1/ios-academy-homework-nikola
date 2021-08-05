@@ -116,7 +116,6 @@ private extension LoginViewController {
 private extension LoginViewController {
     func performAuth(with router: Router){
         let rememberMe = rememberCheckButton.isSelected
-        
         SVProgressHUD.show()
         
         APIManager.shared.call(of: UserResponse.self, router: router) { dataResponse in
@@ -136,7 +135,7 @@ private extension LoginViewController {
             switch result{
             
             case .success(_):
-                SVProgressHUD.showSuccess(withStatus: "Yes")
+                SVProgressHUD.showSuccess(withStatus: "Logged-in")
                 self.navigateToHomeScreen()
             case .failure(let error):
                 print("error: \(error)")

@@ -10,17 +10,17 @@ import SVProgressHUD
 
 class ShowDetailsViewController: UIViewController {
     
+    // MARK: - IBOutlets
+    
+    @IBOutlet private weak var showDetailsTableView: UITableView!
+    @IBOutlet private weak var writeReviewButton: UIButton!
+    
     // MARK: - Properties
     
     var show: Show?
     var reviewsResponse: ReviewsResponse?
     var reviews: [Review] = []
     var refreshControl = UIRefreshControl()
-    
-    // MARK: - IBOutlets
-    
-    @IBOutlet private weak var showDetailsTableView: UITableView!
-    @IBOutlet private weak var writeReviewButton: UIButton!
     
     // MARK: - Lifecycle methods
     
@@ -35,10 +35,6 @@ class ShowDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        print("Evo mene")
     }
 }
 
@@ -117,7 +113,6 @@ private extension ShowDetailsViewController {
     
     func getReviewsFromApi(for id: String) {
         SVProgressHUD.show()
-        
         APIManager.shared.call(of: ReviewsResponse.self,
                                router: Router.Review.getReviews(id: id)) { [weak self] result in
             guard let self = self else { return }
@@ -126,8 +121,8 @@ private extension ShowDetailsViewController {
                 SVProgressHUD.showSuccess(withStatus: "Success")
                 self.reviews = reviewsResponse.reviews
                 self.showDetailsTableView.reloadData()
-            case .failure(let error):
-                SVProgressHUD.dismiss()
+            case .failure(_):
+                SVProgressHUD.showError(withStatus: "Error")
             }
         }
     }

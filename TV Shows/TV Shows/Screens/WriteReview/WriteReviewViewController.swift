@@ -8,11 +8,20 @@
 import UIKit
 import SVProgressHUD
 
+// MARK: - Protocols
+
 protocol WriteReviewViewControllerDelegate : AnyObject {
     func newCommentAdded()
 }
 
 class WriteReviewViewController: UIViewController {
+    
+    // MARK: - IBOutlets
+    
+    @IBOutlet private weak var commentTextView: UITextView!
+    @IBOutlet private weak var submitButton: UIButton!
+    @IBOutlet private weak var ratingView: RatingView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     // MARK: - Properties
     
@@ -22,33 +31,16 @@ class WriteReviewViewController: UIViewController {
     var notificationTokens: [NSObjectProtocol] = []
     weak var delegate: WriteReviewViewControllerDelegate?
     
-    // MARK: - IBOutlets
-    
-    @IBOutlet private weak var commentTextView: UITextView!
-    @IBOutlet private weak var submitButton: UIButton!
-    @IBOutlet private weak var ratingView: RatingView!
-    @IBOutlet private weak var scrollView: UIScrollView!
-    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Close",
-            style: .plain,
-            target: self,
-            action: #selector(didSelectClose)
-        )
-        navigationController?.isToolbarHidden = false
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        // TODO: Nisam uspio dobiti navigationBar
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Close",
             style: .plain,
@@ -57,7 +49,6 @@ class WriteReviewViewController: UIViewController {
         )
         navigationController?.isToolbarHidden = false
         navigationController?.setNavigationBarHidden(false, animated: true)
-    
     }
     
     deinit {
@@ -74,33 +65,33 @@ extension WriteReviewViewController {
     @IBAction func submitButtonActionHandler() {
         guard let show = show else { return }
         SVProgressHUD.show()
-        
         APIManager.shared.call(of: WriteReviewResponse.self,
                                router: Router.Review.addReview(rating: String(ratingView.rating),
                                                                comment: commentTextView.text,
                                                                id: show.id))
-        { [weak self] result in
-            guard let self = self else {return}
-            
-            switch result {
-            case .success(_):
-                self.delegate?.newCommentAdded()
-                SVProgressHUD.showSuccess(withStatus: "Commented")
-                self.dismiss(animated: true)
-            case .failure(_):
-                SVProgressHUD.showError(withStatus: "Error")
+            { [weak self] result in
+                guard let self = self else {return}
+                
+                switch result {
+                case .success(_):
+                    self.delegate?.newCommentAdded()
+                    SVProgressHUD.showSuccess(withStatus: "Commented")
+                    self.dismiss(animated: true)
+                case .failure(_):
+                    SVProgressHUD.showError(withStatus: "Error")
+                }
             }
-        }
     }
 }
-// TODO: Check this
+// TODO: Check this, check for click
 extension WriteReviewViewController : RatingViewDelegate {
-    func didChangeRating(_ rating: Int) { // TODO: check
+    func didChangeRating(_ rating: Int) {
         checkInputs()
     }
 }
 
 // MARK: UITextView Delegate
+
 extension WriteReviewViewController : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         checkInputs()
@@ -116,8 +107,6 @@ private extension WriteReviewViewController {
         commentTextView.makeRounded(withCornerRadius: 20)
         submitButton.makeRounded(withCornerRadius: 20)
     }
-    
-    //TODO: Check
     
     func checkInputs() {
         commentTextView.text.count < 15 || ratingView.rating < 1

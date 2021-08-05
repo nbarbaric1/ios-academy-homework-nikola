@@ -25,7 +25,6 @@ class HomeViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         getShowsFromApi()
         setupTableView()
         registerForNotifications()
@@ -70,10 +69,6 @@ extension HomeViewController: UITableViewDataSource {
 // MARK: - Private functions
 
 private extension HomeViewController {
-    func configureUI() {
-        
-    }
-    
     func navigateToDetails(for show: Show) {
         let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
         let showDetailsViewController = storyboard
@@ -93,18 +88,15 @@ private extension HomeViewController {
     
     func getShowsFromApi() {
         SVProgressHUD.show()
-        
         APIManager.shared.call(of: ShowsResponse.self,
                                router: Router.Show.shows()){ [weak self] result in
             guard let self = self else { return }
-            print("result in hvc:", result)
             switch result {
             case .success(let showsResponse):
-                print((showsResponse))
                 SVProgressHUD.showSuccess(withStatus: "Success")
                 self.shows = showsResponse.shows
                 self.showsTableView.reloadData()
-            case .failure(let error):
+            case .failure(_):
                 SVProgressHUD.showError(withStatus: "Error")
             }
         }
