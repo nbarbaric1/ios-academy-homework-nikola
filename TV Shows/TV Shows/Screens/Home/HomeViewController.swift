@@ -25,14 +25,23 @@ class HomeViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         getShowsFromApi()
         setupTableView()
+        registerForNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        let image = UIImage(named: "ic-profile")
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: image,
+            style: .plain,
+            target: self,
+            action: #selector(didSelectClose)
+        )
+        navigationItem.hidesBackButton = true  
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }
 
@@ -60,10 +69,6 @@ extension HomeViewController: UITableViewDataSource {
 // MARK: - Private functions
 
 private extension HomeViewController {
-    func configureUI() {
-        
-    }
-    
     func navigateToDetails(for show: Show) {
         let storyboard = UIStoryboard(name: "ShowDetails", bundle: nil)
         let showDetailsViewController = storyboard
@@ -83,18 +88,15 @@ private extension HomeViewController {
     
     func getShowsFromApi() {
         SVProgressHUD.show()
-        
         APIManager.shared.call(of: ShowsResponse.self,
                                router: Router.Show.shows()){ [weak self] result in
             guard let self = self else { return }
-            print("result in hvc:", result)
             switch result {
             case .success(let showsResponse):
-                print((showsResponse))
                 SVProgressHUD.showSuccess(withStatus: "Success")
                 self.shows = showsResponse.shows
                 self.showsTableView.reloadData()
-            case .failure(let error):
+            case .failure(_):
                 SVProgressHUD.showError(withStatus: "Error")
             }
         }
@@ -105,5 +107,30 @@ private extension HomeViewController {
         showsTableView.rowHeight = UITableView.automaticDimension
         showsTableView.delegate = self
         showsTableView.dataSource = self
+    }
+    
+    @objc func didSelectClose() {
+        navigateToMyProfile()
+    }
+    
+    func navigateToMyProfile() {
+        let storyboard = UIStoryboard(name: "MyProfile", bundle: nil)
+        let myProfileViewController = storyboard
+            .instantiateViewController(
+                withIdentifier: String(describing: MyProfileViewController.self)
+            ) as! MyProfileViewController
+        navigationController?.present(myProfileViewController, animated: true, completion: nil)
+    }
+    
+    func registerForNotifications() {
+        NotificationCenter.default.addObserver(forName: Notification.Name(Constants.Notifications.logOut), object: nil, queue: nil) { _ in
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let loginViewController = storyboard
+                .instantiateViewController(
+                    withIdentifier: String(describing: LoginViewController.self)
+                ) as! LoginViewController
+            self.navigationController?.setViewControllers([loginViewController], animated:
+           true)
+        }
     }
 }

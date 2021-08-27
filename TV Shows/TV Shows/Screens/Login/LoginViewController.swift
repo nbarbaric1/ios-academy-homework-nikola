@@ -24,8 +24,6 @@ class LoginViewController : UIViewController {
     
     // MARK: - Properties
     
-    var userResponse: UserResponse?
-    var authInfo: AuthInfo?
     var notificationTokens: [NSObjectProtocol] = []
     
     // MARK: - Lifecycle methods
@@ -71,12 +69,20 @@ private extension LoginViewController {
     @IBAction private func rememberCheckButtonActionHandler() {
         rememberCheckButton.isSelected.toggle()
     }
+    @IBAction private func passwordEditingDidChangeActionHandler() {
+        checkInputs(didEnd: false)
+    }
+    
+    @IBAction private func emailTextfieldEditingDidChangeActionHandler() {
+        checkInputs(didEnd: false)
+    }
+    
     @IBAction private func passwordEditingDidEndActionHandler() {
-        checkInputs()
+        checkInputs(didEnd: true)
     }
     
     @IBAction private func emailTextfieldEditingDidEndActionHandler() {
-        checkInputs()
+        checkInputs(didEnd: true)
     }
     
     @IBAction private func seePasswordButtonActionHandler() {
@@ -110,7 +116,6 @@ private extension LoginViewController {
 private extension LoginViewController {
     func performAuth(with router: Router){
         let rememberMe = rememberCheckButton.isSelected
-        
         SVProgressHUD.show()
         
         APIManager.shared.call(of: UserResponse.self, router: router) { dataResponse in
@@ -129,8 +134,8 @@ private extension LoginViewController {
             guard let self = self else { return }
             switch result{
             
-            case .success(let userResponse):
-                SVProgressHUD.showSuccess(withStatus: "Yes")
+            case .success(_):
+                SVProgressHUD.showSuccess(withStatus: "Logged-in")
                 self.navigateToHomeScreen()
             case .failure(let error):
                 print("error: \(error)")
@@ -145,10 +150,17 @@ private extension LoginViewController {
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     
-    func checkInputs() {
+    func checkInputs(didEnd: Bool) {
         guard let email = emailTextfield.text,
               let password = passwordTextfield.text
         else { return }
+        
+        if didEnd && !email.isValidEmail(){
+            emailTextfield.shake()
+        }
+        if didEnd && !(password.count > 5) {
+            passwordTextfield.shake()
+        }
         
         if email.isValidEmail() && password.count > 5{
             loginButton.isEnabled = true

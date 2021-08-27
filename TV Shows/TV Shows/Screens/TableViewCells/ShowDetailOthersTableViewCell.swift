@@ -15,11 +15,9 @@ class ShowDetailOthersTableViewCell: UITableViewCell {
     @IBOutlet private weak var commentLabel: UILabel!
     @IBOutlet private weak var ratingView: RatingView!
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
-        photoOfReviewerImageView.layer.cornerRadius = 20
-        photoOfReviewerImageView.clipsToBounds = true
+        photoOfReviewerImageView.makeRounded(withCornerRadius: 20)
         photoOfReviewerImageView.image = UIImage(named: "ic-profile-placeholder")
     }
     
@@ -38,7 +36,8 @@ class ShowDetailOthersTableViewCell: UITableViewCell {
         ratingView.setRoundedRating(Double(review.rating))
         
         if let image = review.user.imageUrl {
-            photoOfReviewerImageView.kf.setImage(with: URL(string: image), placeholder: UIImage(named: "ic-profile-placeholder"))
+            photoOfReviewerImageView.kf.setImage(with: URL(string: image),
+                                                 placeholder: UIImage(named: "ic-profile-placeholder"))
         } else {
             photoOfReviewerImageView.image = UIImage(named: "ic-profile-placeholder")
         }

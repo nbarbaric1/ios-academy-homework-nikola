@@ -9,8 +9,4 @@ import UIKit
 
 class ShowDetailNoReviewsTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 }

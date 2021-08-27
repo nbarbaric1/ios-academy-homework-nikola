@@ -24,7 +24,8 @@ class ShowDetailFirstTableViewCell: UITableViewCell {
     }
 
     func configure(with show: Show) {
-        showImageView.kf.setImage(with: URL(string: show.imageUrl))
+        showImageView.kf.setImage(with: URL(string: show.imageUrl),
+                                  placeholder: UIImage(named: "ic-show-placeholder-vertical"))
         showDescriptionLabel.text = show.description
         
         if let averageRating = show.averageRating {
@@ -35,7 +36,5 @@ class ShowDetailFirstTableViewCell: UITableViewCell {
         } else {
             showRating.isHidden = true
         }
-        
     }
-
 }

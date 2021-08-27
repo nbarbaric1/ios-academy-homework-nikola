@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--My Profile View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="MyProfileViewController" id="Y6W-OH-hqX" customClass="MyProfileViewController" customModule="TV_Shows" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ErJ-b9-j5r" userLabel="containerView">
+                                <rect key="frame" x="0.0" y="448" width="414" height="448"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-profile-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="EAZ-XF-nh1">
+                                        <rect key="frame" x="20" y="60.5" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="A6L-ze-Cn2"/>
+                                            <constraint firstAttribute="width" constant="150" id="rbx-il-G7G"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6u-PI-Cda">
+                                        <rect key="frame" x="190" y="130.5" width="204" height="30"/>
+                                        <state key="normal" title="Change profile photo">
+                                            <color key="titleColor" red="0.32156862749999998" green="0.21176470589999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeProfilePhotoButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7Qj-oD-arj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3t-ZI-a9P">
+                                        <rect key="frame" x="20" y="240.5" width="374" height="50"/>
+                                        <color key="backgroundColor" red="0.32156862749999998" green="0.21176470589999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="uWg-UG-AfX"/>
+                                        </constraints>
+                                        <state key="normal" title="Log out">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="logOutButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="XPA-Gl-nkc"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="thisismyemail12@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qs-Hp-Tmg">
+                                        <rect key="frame" x="20" y="20" width="231.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="F6u-PI-Cda" firstAttribute="top" secondItem="5qs-Hp-Tmg" secondAttribute="bottom" constant="90" id="Dod-qB-pdL"/>
+                                    <constraint firstItem="o3t-ZI-a9P" firstAttribute="leading" secondItem="ErJ-b9-j5r" secondAttribute="leading" constant="20" id="JOC-mg-TKk"/>
+                                    <constraint firstItem="EAZ-XF-nh1" firstAttribute="top" secondItem="5qs-Hp-Tmg" secondAttribute="bottom" constant="20" id="QGh-YT-ZmV"/>
+                                    <constraint firstItem="o3t-ZI-a9P" firstAttribute="top" secondItem="EAZ-XF-nh1" secondAttribute="bottom" constant="30" id="bpo-0L-kaC"/>
+                                    <constraint firstItem="5qs-Hp-Tmg" firstAttribute="leading" secondItem="ErJ-b9-j5r" secondAttribute="leading" constant="20" id="c7N-xm-dEw"/>
+                                    <constraint firstItem="o3t-ZI-a9P" firstAttribute="centerX" secondItem="ErJ-b9-j5r" secondAttribute="centerX" id="eaO-5D-ovt"/>
+                                    <constraint firstItem="EAZ-XF-nh1" firstAttribute="leading" secondItem="ErJ-b9-j5r" secondAttribute="leading" constant="20" id="et8-MD-Pj9"/>
+                                    <constraint firstItem="5qs-Hp-Tmg" firstAttribute="top" secondItem="ErJ-b9-j5r" secondAttribute="top" constant="20" id="gPe-fL-1oF"/>
+                                    <constraint firstAttribute="trailing" secondItem="o3t-ZI-a9P" secondAttribute="trailing" constant="20" id="iat-Bq-bYj"/>
+                                    <constraint firstItem="F6u-PI-Cda" firstAttribute="leading" secondItem="EAZ-XF-nh1" secondAttribute="trailing" constant="20" id="nOL-f3-Y4i"/>
+                                    <constraint firstAttribute="trailing" secondItem="F6u-PI-Cda" secondAttribute="trailing" constant="20" id="s30-N6-T50"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUi-IX-oco" userLabel="transparentView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="448"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ErJ-b9-j5r" secondAttribute="bottom" id="63A-Hy-a5P"/>
+                            <constraint firstItem="ErJ-b9-j5r" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.5" id="8kg-YA-pkZ"/>
+                            <constraint firstItem="ErJ-b9-j5r" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="KNX-9r-2mg"/>
+                            <constraint firstAttribute="trailing" secondItem="kUi-IX-oco" secondAttribute="trailing" id="QJh-rK-LGG"/>
+                            <constraint firstItem="kUi-IX-oco" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="TZc-vD-aHU"/>
+                            <constraint firstItem="kUi-IX-oco" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Ueg-39-Tov"/>
+                            <constraint firstItem="ErJ-b9-j5r" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="eLs-hs-Itn"/>
+                            <constraint firstItem="ErJ-b9-j5r" firstAttribute="top" secondItem="kUi-IX-oco" secondAttribute="bottom" id="z9z-LV-p2X"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="ErJ-b9-j5r" id="vR0-D2-dJ9"/>
+                        <outlet property="logOutButton" destination="o3t-ZI-a9P" id="lkk-hw-QlD"/>
+                        <outlet property="myEmailLabel" destination="5qs-Hp-Tmg" id="mo9-bB-5bS"/>
+                        <outlet property="myProfilePhotoImageView" destination="EAZ-XF-nh1" id="fmf-Fu-1fc"/>
+                        <outlet property="transparentView" destination="kUi-IX-oco" id="Zy1-BA-FzR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-23" y="-9"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic-profile-placeholder" width="150" height="150"/>
+    </resources>
+</document>

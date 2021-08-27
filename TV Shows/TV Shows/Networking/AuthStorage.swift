@@ -15,7 +15,6 @@ class AuthStorage {
         set { cachedAuthInfo = newValue }
     }
     
-    private static let authInfoUserDefaultsKey = "authInfo"
     private var cachedAuthInfo: AuthInfo?
     
     private init() {}
@@ -24,7 +23,7 @@ class AuthStorage {
         cachedAuthInfo = authInfo
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(authInfo) {
-            UDM.shared.defaults.set(encoded, forKey: Self.authInfoUserDefaultsKey)
+            UDM.shared.defaults.set(encoded, forKey: Constants.Storage.authInfoUserDefaultsKey)
         }
         
     }
@@ -38,7 +37,7 @@ private extension AuthStorage {
             return cachedAuthInfo
         }
         
-        let savedAuthInfo = UDM.shared.defaults.object(forKey: Self.authInfoUserDefaultsKey) as? Data
+        let savedAuthInfo = UDM.shared.defaults.object(forKey: Constants.Storage.authInfoUserDefaultsKey) as? Data
         let loadedInfo = savedAuthInfo.flatMap { try? JSONDecoder().decode(AuthInfo.self, from: $0) }
         cachedAuthInfo = loadedInfo
         return loadedInfo

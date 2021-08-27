@@ -45,6 +45,9 @@
 		4285B8B026B63EF500A72C6D /* ShowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4285B8AF26B63EF500A72C6D /* ShowRouter.swift */; };
 		42A9829326BA01D90015FE8D /* ReviewsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A9829226BA01D90015FE8D /* ReviewsRouter.swift */; };
 		42A9829826BA2C0F0015FE8D /* ShowDetailNoReviewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A9829726BA2C0F0015FE8D /* ShowDetailNoReviewsTableViewCell.swift */; };
+		42D56A5A26BB031B0045A8D1 /* MyProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D56A5926BB031B0045A8D1 /* MyProfile.storyboard */; };
+		42D56A5C26BB03360045A8D1 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D56A5B26BB03360045A8D1 /* MyProfileViewController.swift */; };
+		42D56A5E26BB2E950045A8D1 /* MyProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D56A5D26BB2E950045A8D1 /* MyProfileRouter.swift */; };
 		42EC3C1626B0FD440053BE57 /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */; };
 		B116EEA007E847624584A62B /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33BFA9C0E4879027F658BAD9 /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
@@ -92,6 +95,9 @@
 		4285B8AF26B63EF500A72C6D /* ShowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRouter.swift; sourceTree = "<group>"; };
 		42A9829226BA01D90015FE8D /* ReviewsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsRouter.swift; sourceTree = "<group>"; };
 		42A9829726BA2C0F0015FE8D /* ShowDetailNoReviewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailNoReviewsTableViewCell.swift; sourceTree = "<group>"; };
+		42D56A5926BB031B0045A8D1 /* MyProfile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyProfile.storyboard; sourceTree = "<group>"; };
+		42D56A5B26BB03360045A8D1 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		42D56A5D26BB2E950045A8D1 /* MyProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileRouter.swift; sourceTree = "<group>"; };
 		42EC3C1526B0FD440053BE57 /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
 		DBAF33CE8F73495F6D1C1E84 /* Pods-TV Shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.debug.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,6 +174,8 @@
 			children = (
 				42424AFC26A97CF6003E96FC /* Home.storyboard */,
 				42424AFE26A97D08003E96FC /* HomeViewController.swift */,
+				42D56A5926BB031B0045A8D1 /* MyProfile.storyboard */,
+				42D56A5B26BB03360045A8D1 /* MyProfileViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -245,6 +253,7 @@
 				4285B89E26B6029900A72C6D /* UserRouter.swift */,
 				4285B8AF26B63EF500A72C6D /* ShowRouter.swift */,
 				42A9829226BA01D90015FE8D /* ReviewsRouter.swift */,
+				42D56A5D26BB2E950045A8D1 /* MyProfileRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -347,6 +356,7 @@
 			files = (
 				4259E94C26B1E767007EEC06 /* ShowDetails.storyboard in Resources */,
 				420672B926975F65002306DB /* LaunchScreen.storyboard in Resources */,
+				42D56A5A26BB031B0045A8D1 /* MyProfile.storyboard in Resources */,
 				4259E95B26B23319007EEC06 /* WriteReview.storyboard in Resources */,
 				42424AFD26A97CF6003E96FC /* Home.storyboard in Resources */,
 				420672B626975F65002306DB /* Assets.xcassets in Resources */,
@@ -408,6 +418,7 @@
 				4285B89F26B6029900A72C6D /* UserRouter.swift in Sources */,
 				42A9829326BA01D90015FE8D /* ReviewsRouter.swift in Sources */,
 				42262D8E26B018B000E938B5 /* ShowsResponse.swift in Sources */,
+				42D56A5E26BB2E950045A8D1 /* MyProfileRouter.swift in Sources */,
 				42424B0126AA2223003E96FC /* User.swift in Sources */,
 				4259E95026B1F8CF007EEC06 /* ShowDetailFirstTableViewCell.swift in Sources */,
 				4259E96426B2635B007EEC06 /* WriteReviewResponse.swift in Sources */,
@@ -419,6 +430,7 @@
 				4259E94E26B1E7A0007EEC06 /* ShowDetailsViewController.swift in Sources */,
 				4259E95426B20690007EEC06 /* ShowDetailOthersTableViewCell.swift in Sources */,
 				427C5F72269C6DE9000BC489 /* LoginViewController.swift in Sources */,
+				42D56A5C26BB03360045A8D1 /* MyProfileViewController.swift in Sources */,
 				42424B0B26AF57DA003E96FC /* String+Verifications.swift in Sources */,
 				4285B8AA26B60F9300A72C6D /* AuthInterceptor.swift in Sources */,
 				420672AD26975F63002306DB /* AppDelegate.swift in Sources */,

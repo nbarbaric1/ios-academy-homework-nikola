@@ -8,11 +8,20 @@
 import UIKit
 import SVProgressHUD
 
+// MARK: - Protocols
+
 protocol WriteReviewViewControllerDelegate : AnyObject {
     func newCommentAdded()
 }
 
 class WriteReviewViewController: UIViewController {
+    
+    // MARK: - IBOutlets
+    
+    @IBOutlet private weak var commentTextView: UITextView!
+    @IBOutlet private weak var submitButton: UIButton!
+    @IBOutlet private weak var ratingView: RatingView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     // MARK: - Properties
     
@@ -21,13 +30,6 @@ class WriteReviewViewController: UIViewController {
     var authInfo: AuthInfo?
     var notificationTokens: [NSObjectProtocol] = []
     weak var delegate: WriteReviewViewControllerDelegate?
-    
-    // MARK: - IBOutlets
-    
-    @IBOutlet private weak var commentTextView: UITextView!
-    @IBOutlet private weak var submitButton: UIButton!
-    @IBOutlet private weak var ratingView: RatingView!
-    @IBOutlet private weak var scrollView: UIScrollView!
     
     // MARK: - Lifecycle methods
     
@@ -38,21 +40,31 @@ class WriteReviewViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        // TODO: Nisam uspio dobiti navigationBar
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Close",
+            style: .plain,
+            target: self,
+            action: #selector(didSelectClose)
+        )
+        navigationController?.isToolbarHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     deinit {
         notificationTokens.forEach { notificationToken in
             scrollView.deleteObservers(for: notificationToken)
-        }    }
+        }
+    }
 }
+
+
 
 // MARK: IBActions
 extension WriteReviewViewController {
     @IBAction func submitButtonActionHandler() {
         guard let show = show else { return }
         SVProgressHUD.show()
-     
         APIManager.shared.call(of: WriteReviewResponse.self,
                                router: Router.Review.addReview(rating: String(ratingView.rating),
                                                                comment: commentTextView.text,
@@ -64,20 +76,22 @@ extension WriteReviewViewController {
                 case .success(_):
                     self.delegate?.newCommentAdded()
                     SVProgressHUD.showSuccess(withStatus: "Commented")
+                    self.dismiss(animated: true)
                 case .failure(_):
                     SVProgressHUD.showError(withStatus: "Error")
                 }
             }
     }
 }
-// TODO: Check this
+// TODO: Check this, check for click
 extension WriteReviewViewController : RatingViewDelegate {
-    func didChangeRating(_ rating: Int) { // TODO: check
+    func didChangeRating(_ rating: Int) {
         checkInputs()
     }
 }
 
 // MARK: UITextView Delegate
+
 extension WriteReviewViewController : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         checkInputs()
@@ -92,18 +106,6 @@ private extension WriteReviewViewController {
         self.hideKeyboardWhenTappedAround()
         commentTextView.makeRounded(withCornerRadius: 20)
         submitButton.makeRounded(withCornerRadius: 20)
-        
-        //TODO: Check
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Close",
-            style: .plain,
-            target: self,
-            action: #selector(didSelectClose)
-        )
-    }
-    
-    @objc func didSelectClose() {
-        dismiss(animated: true, completion: nil)
     }
     
     func checkInputs() {
@@ -111,4 +113,9 @@ private extension WriteReviewViewController {
             ? submitButton.disableButton()
             : submitButton.enableButton()
     }
+    
+    @objc func didSelectClose() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
+
